@@ -8,7 +8,7 @@
 <html lang="zxx">
 
 <head>
-    <title>Replenish HR Management Category Bootstrap responsive Web Template | Home :: w3layouts</title>
+    <title>Lam Them</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Replenish a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -22,11 +22,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             window.scrollTo(0, 1);
         }
     </script>
-    <link href="{{asset('css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('css/zoomslider.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('css/style6.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('css/style.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('css/fontawesome-all.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/zoomslider.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/style6.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/style.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/fontawesome-all.css')}}" rel="stylesheet">
     <link href="{{asset('//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700')}}" rel="stylesheet">
     <link href="{{asset('//fonts.googleapis.com/css?family=Quicksand:300,400,500,700')}}" rel="stylesheet">
 </head>
@@ -47,13 +47,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--//model-form-->
     <!-- js -->
     <!--/slider-->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <script src="js/jquery.zoomslider.min.js"></script>
+    <script src="{{asset('/js/jquery-1.11.1.min.js')}}"></script>
+    <script src="{{asset('/js/modernizr-2.6.2.min.js')}}"></script>
+    <script src="{{asset('/js/jquery.zoomslider.min.js')}}"></script>
     <!--//slider-->
     <!--search jQuery-->
-    <script src="js/classie-search.js"></script>
-    <script src="js/demo1-search.js"></script>
+    <script src="{{asset('/js/classie-search.js')}}"></script>
+    <script src="{{asset('/js/demo1-search.js')}}"></script>
     <!--//search jQuery-->
 
     <script>
@@ -91,18 +91,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //password-script -->
 
     <!-- stats -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.countup.js"></script>
+    <script src="{{asset('/js/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('/js/jquery.countup.js')}}"></script>
     <script>
         $('.counter').countUp();
     </script>
     <!-- //stats -->
 
     <!-- //js -->
-    <script src="js/bootstrap.js"></script>
+    <script src="{{asset('/js/bootstrap.js')}}"></script>
     <!--/ start-smoth-scrolling -->
-    <script src="js/move-top.js"></script>
-    <script src="js/easing.js"></script>
+    <script src="{{asset('/js/move-top.js')}}"></script>
+    <script src="{{asset('/js/easing.js')}}"></script>
     <script>
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event) {

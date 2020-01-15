@@ -1,6 +1,16 @@
 <style type="text/css">
 #demo-1{
 	min-height: 300px;
+    overflow: inherit;
+}
+.logo i{
+    color: #F39C12;
+}
+.navbar-light .navbar-brand:hover{
+    color: #F39C12;
+}
+li.nav-item.active {
+    background-color: #F39C12;
 }
 </style> 
    <!-- banner-inner -->
@@ -64,10 +74,10 @@
                                 <?php
                                 	if (isset($nav)&&isset($page)) {
                                 		foreach ($nav as $row) {
-                                			if ($row->link==$page) {
+                                			if ($row['link']==$page) {
                                 				?>
                                 					<li class="nav-item active">
-                                    					<a class="nav-link" href="<?php echo $row->link?>"><?php echo $row->name?></a>
+                                    					<a class="nav-link" href="<?php echo url($row['link'])?>"><?php echo $row['name']?></a>
                                 					</li>
 
 
@@ -76,7 +86,7 @@
                                 			else{
                                 				?>
                                 					<li class="nav-item">
-                                    					<a class="nav-link" href="<?php echo $row->link?>"><?php echo $row->name?>
+                                    					<a class="nav-link" href="<?php echo url($row['link'])?>"><?php echo $row['name']?>
                                         				<span class="sr-only">(current)</span>
                                     					</a>
                                 					</li>
@@ -107,8 +117,8 @@
         <li class="breadcrumb-item active">
         <?php
         	foreach ($nav as $row) {
-        		if ($row->link==$page) {
-        			echo $row->name;
+        		if ($row['link']==$page) {
+        			echo $row['name'];
         		}
         	}
         ?>

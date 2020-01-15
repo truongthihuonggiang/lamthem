@@ -10,18 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-$tb = DB::table('kt_nav')->select(['id','name','link'])->get();
-$nav = array();
-foreach ($tb as $row) {
-		$nav[] = $row;						
-}
-View::share([
-	'nav'=>$nav
-]);
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('index',function(){
-	return view('layouts.content',['index'=>'index']);
-});
-Route::get('{page}','Mycontroller@index');
+// Route::get('index',function(){
+// 	return view('layouts.content',['index'=>'index']);
+// });
+Route::get('test',['uses'=>'Mycontroller@test']);
+
+
+Route::post('login',['as'=>'login','uses'=>'Mycontroller@login']);
+Route::get('{page}','Mycontroller@page');
+Route::get('chitietvieclam/{id}',['uses'=>'Mycontroller@chitietvieclam']);
+
+

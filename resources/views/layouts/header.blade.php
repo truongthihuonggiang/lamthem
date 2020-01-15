@@ -1,4 +1,26 @@
 <style type="text/css">
+#demo-1{
+    overflow: inherit;
+}
+.logo i{
+    color: #F39C12;
+}
+.navbar-light .navbar-brand:hover{
+    color: #F39C12;
+}
+li.nav-item.active {
+    background-color: #F39C12;
+}
+.zs-enabled .zs-slideshow .zs-bullets .zs-bullet.active{
+    background-color: #F39C12;
+    border-color: #F39C12;
+}
+.ban-form button.btn1{
+    background: #D35400;
+}
+.ban-form button.btn1:hover{
+    background:#28B463;
+}
 .banner-info-w3layouts{
 	padding-top: 0;
 }	
@@ -22,32 +44,34 @@
 .view4{
 	border-top-right-radius: 5.5em;
 	border-bottom-left-radius: 5.5em;
-	border:0.5em solid #ff3c41;
+	border:0.5em solid #F39C12;
+    background: #F39C12;
 }
 .view4:hover{
 	background-color: white;
-	border:0.5em solid #ff3c41;
-	color: #ff3c41;
+	border:0.5em solid #F39C12;
+	color: #F39C12;
 	transition: 0.4s;
 }
 .view4:hover i,
 .view4:hover h3{
-	color: #ff3c41;
+	color: #F39C12;
 }
 .view5{
 	border-top-left-radius: 5.5em;
 	border-bottom-right-radius: 5.5em;
-	border:0.5em solid #76daff;
+	border:0.5em solid #239B56;
+    background: #239B56;
 }
 .view5:hover{
 	background-color: white;
-	border:0.5em solid #76daff;
-	color: #76daff;
-	transition: 0.4s;
+	border:0.5em solid 239B56;
+	color: #239B56;
+	transition: 0.6s;
 }
 .view5:hover i,
 .view5:hover h3{
-	color: #76daff;
+	color: #239B56;
 }
 </style> 
     <!-- banner-inner -->
@@ -111,10 +135,10 @@
                                 <?php
                                 	if (isset($nav)) {
                                 		foreach ($nav as $row) {
-                                			if ($row->link==$index) {
+                                			if ($row['link']=='index') {
                                 				?>
                                 					<li class="nav-item active">
-                                    					<a class="nav-link" href="<?php echo $row->link?>"><?php echo $row->name?></a>
+                                    					<a class="nav-link" href="<?php echo url($row['link'])?>"><?php echo $row['name']?></a>
                                 					</li>
 
 
@@ -123,7 +147,7 @@
                                 			else{
                                 				?>
                                 					<li class="nav-item">
-                                    					<a class="nav-link" href="<?php echo $row->link?>"><?php echo $row->name?>
+                                    					<a class="nav-link" href="<?php echo url($row['link'])?>"><?php echo $row['name']?>
                                         				<span class="sr-only">(current)</span>
                                     					</a>
                                 					</li>
@@ -154,37 +178,25 @@
                     <!-- <div class="col-md-3 banf">
                         <input class="form-control" type="text" name="Name" placeholder="Name" required="">
                     </div> -->
-                    <div class="col-md-4 banf">
-                        <select class="form-control" id="country12" name="add">
-                        	<?php
-                        			
-                        	?>
-                            <option>Location</option>
-                            <option>Afghanistan</option>
-                            <option>Alaska</option>
-                            <option>Andong</option>
-                            <option>Bologna</option>
-                            <option>Canada</option>
-                            <option>France</option>
-                            <option>Germany</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 banf">
+                    
+                    <div class="col-md-6 banf">
                         <select id="country13" class="form-control" name="type_job">
-                            <option>Finance Sector</option>
-                            <option>Banking Sector</option>
-                            <option> Engineering Sector</option>
-                            <option>Accounting Jobs</option>
-                            <option>Interior Design</option>
-                            <option>Export Import Jobs</option>
+                            <?php
+                                foreach ($tb_loaicongviec as $row) {
+                                    ?>
+                                        <option value="<?php echo $row->idloaiviec?>"><?php echo $row->tenloaiviec?></option>
+                                    <?php
+                                }
+                            ?>
                         </select>
 
                     </div>
-                    <div class="col-md-4 banf">
+                    <div class="col-md-6 banf">
                         <button class="btn1" type="submit">FIND JOB
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
+                    
                 </form>
             </div>
             <!--//banner-info-w3layouts-->
