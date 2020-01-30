@@ -32,16 +32,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
+    <!-- header -->
     @if(isset($page))
         @include('pages.header')
     @else
         @include('layouts.header') 
     @endif
+    <!-- //header -->
+    <!-- content -->
     <div id="content">
         @yield('content')
         
     </div>
+    <!-- //content -->
+    <!-- footer -->
     @include('layouts.footer')
+    <!-- //footer -->
 
 
     <!--//model-form-->

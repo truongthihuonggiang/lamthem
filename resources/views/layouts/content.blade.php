@@ -32,7 +32,7 @@
                                             foreach ($noidung as $row)
                                             {
                                                 ?>
-                                            <div class="job-post-main row">
+                                            <div class="job-post-main row my-3">
                                                 <div class="col-md-9 job-post-info text-left">
                                                     <div class="job-post-icon">
                                                         <i class="fas fa-briefcase"></i>
@@ -64,7 +64,7 @@
                                             <div class="col-md-3 job-single-time text-right">
                                                 <span class="job-time">
                                                     <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
-                                                <a href="<?php echo "chitietvieclam/".$row->idvieclam?>" class="aply-btn ">Đăng ký</a>
+                                                <a href="{{'chitietvieclam/'.$row->idvieclam}}" class="aply-btn" >Đăng ký</a>
                                             </div>
                                         </div>
                                                 <?php

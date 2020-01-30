@@ -19,9 +19,22 @@ Route::get('/', function () {
 // });
 Route::get('test',['uses'=>'Mycontroller@test']);
 
+Route::post('timviec',[
+	'as'=>'timviec',
+	'uses'=>'Mycontroller@timviec'
+]);
 
-Route::post('login',['as'=>'login','uses'=>'Mycontroller@login']);
+
+Route::post('login',[
+	'as'=>'login',
+	'uses'=>'Mycontroller@login'
+]);
+
 Route::get('{page}','Mycontroller@page');
-Route::get('chitietvieclam/{id}',['uses'=>'Mycontroller@chitietvieclam']);
+
+Route::get('chitietvieclam/{id}',[
+	'as'=>'chitietvieclam',
+	'uses'=>'Mycontroller@chitietvieclam'
+]);
 
 

@@ -8,8 +8,21 @@
 .qual-icon i{
 	font-size: 1.5em;
 }
+.qual-info h4{
+	line-height: 2em;
+}
 .emply-resume-info h4 a{
 	color: #145A32;
+	font-size: 2em;
+}
+.qual-info{
+	border-bottom: 1px solid grey;
+}
+.qual-info h4 a{
+	color: #145A32;
+}
+.qual-info h4 a:hover{
+	color: #F39C12;
 }
 </style>
 <?php
@@ -34,58 +47,73 @@ if (isset($tb_vieclam)) {
                 <!--row -->
                 <div class="row qualification-details mt-2">
                     <div class="col-md-12 qual-grid mt-2">
-                        <div class=" col-md-3 qual-icon">
-                            <i class="fas fa-eye"></i><span class="ml-2">Luong theo gio</span>
+                        <div class=" col-md-4 qual-icon">
+                            <i class="far fa-building"></i><span class="col-md-3 ml-2">Người tuyển</span>
                         </div>
                         <div class="qual-info">
-                            <h4>Viewed</h4>
+                            <h4><a href="">
+                            <?php
+                            	if (isset($tb_oc_nguoidung)) {
+                            		foreach ($tb_oc_nguoidung as $row1) {
+                            			if ($row1->idnguoidung==$row->idtacgia) {
+                            				echo $row1->ten;
+                            			}
+                            		}
+                            	}
+                            	else
+                            	{
+                            		echo "Không xác định";
+                            	}
+                            ?>	
+                            </a></h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-3 qual-icon">
-                            <i class="far fa-file-alt"></i>
+                        <div class="col-md-4 qual-icon">
+                            <i class="far fa-file-alt"></i><span class="col-md-3 ml-2">Mô tả </span>
                         </div>
                         <div class="qual-info">
-                            <h4>Posted Jobs</h4>
+                            <h4>{{$row->mota}}</h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-3 qual-icon ">
-                            <i class="fas fa-bars"></i>
+                        <div class="col-md-4 qual-icon ">
+                            <i class="fas fa-dollar-sign"></i><span class="col-md-3 ml-2">Lương trọn gói </span>
                         </div>
                         <div class="qual-info">
-                            <h4>Categories</h4>
+                            <h4>{{$row->luongtrongoi}}</h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-3 qual-icon">
-                            <i class="fas fa-users"></i>
+                     <div class="col-md-12 qual-grid mt-2">
+                        <div class="col-md-4 qual-icon">
+                        <i class="fas fa-map-marker-alt"></i><span class="col-md-3 ml-2">Địa điểm </span>
                         </div>
                         <div class="qual-info">
-                            <h4>Team Size</h4>
+                            <h4>{{$row->phuongxa.' '.$row->thanhpho.', '.$row->tinh}}</h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-3 qual-icon">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <div class="col-md-12 qual-grid mt-2" style="border-bottom: none;">
+                        <div class="col-md-4 qual-icon">
+                            <i class="far fa-clock"></i><span class="col-md-3 ml-2">Thời gian tuyển dụng</span>
                         </div>
-                        <div class="qual-info">
-                            <h4>Team Size</h4>
+                        <div class="qual-info" style="border-bottom: none;">
+                            <h4>{{$row->ngaybatdau.' - '.$row->ngayketthuc}}</h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                   
                 </div>
                 <!--row -->
 				<!---728x90--->
                 <!--/about -->
-                <div class="candidate-ab-info mt-5">
+                <!-- <div class="candidate-ab-info mt-5">
                     <h5 class="j-b mb-3">Mo ta cong viec</h5>
                     <p>{{$row->mota}}</p>
-                </div>
+                </div> -->
                 <!--// about -->
 				<!---728x90--->
                 <!--/history -->

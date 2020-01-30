@@ -16,19 +16,33 @@ class Mycontroller extends Controller
 	function __construct(){
 		$kt_nav = new kt_nav;
 		$nav = $kt_nav->get_nav();
-		View::share(['nav'=>$nav]);	
+		$kt_vieclam = new kt_vieclam;
+        $tb_tinh = $kt_vieclam->get_tinh();
+        $kt_loaicongviec = new kt_loaicongviec;
+        $tb_loaicongviec = $kt_loaicongviec->all();
+		View::share([
+            'nav'=>$nav,
+            'tb_tinh'=>$tb_tinh,
+            'tb_loaicongviec'=>$tb_loaicongviec]);	
 	}
     public function page($page){
-    	$oc_nguoidung = new oc_nguoidung;
-    	$tb_oc_nguoidung = $oc_nguoidung->all();
-    	if ($page=='index') {
-    		$kt_loaicongviec = new kt_loaicongviec;
-    		$tb_loaicongviec = $kt_loaicongviec->all();
-    		$kt_vieclam = new kt_vieclam;
-    		$tb_vieclam = $kt_vieclam->get_kt_vieclam();
-    		return view('layouts.content',['index'=>$page,'tb_vieclam'=>$tb_vieclam,'tb_loaicongviec'=>$tb_loaicongviec,'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
-    	}
-    	return view('pages.'.$page,['page'=>$page]);
+        $oc_nguoidung = new oc_nguoidung;
+        $tb_oc_nguoidung = $oc_nguoidung->all();
+        if ($page=='index') {
+                $kt_vieclam = new kt_vieclam;
+                $tb_vieclam = $kt_vieclam->get_kt_vieclam();
+            
+                return view('layouts.content',[
+                            'index'=>$page,'tb_vieclam'=>$tb_vieclam,
+                            'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
+            }
+            $layouts_path = 'pages.'.$page;
+            if (file_exists($layouts_path)) {
+                echo "yes";
+            }
+            return view('pages.'.$page,['page'=>$page]);
+        
+    	
     }
     public function login(Request $request){
     	$oc_nguoidung = new oc_nguoidung;
@@ -52,12 +66,27 @@ class Mycontroller extends Controller
     	$tb_vieclam = $kt_vieclam->where('idvieclam',$id)->get();
     	$oc_nguoidung = new oc_nguoidung;
     	$tb_oc_nguoidung = $oc_nguoidung->all();
-    	return view('pages.chitietvieclam',['page'=>'tuyendung','tb_vieclam'=>$tb_vieclam,'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
+
+    	return view('pages.chitietvieclam',
+            ['page'=>'tuyendung',
+            'tb_vieclam'=>$tb_vieclam,
+            'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
 
     }
     public function test(){
-    	$kt_vieclam = new kt_nav;
-    	$tb_vieclam = $kt_vieclam->get_nav();
-    	var_dump($tb_vieclam);
+    	$kt_vieclam = new kt_vieclam;
+    	$tb_vieclam = $kt_vieclam->get_tinh();
+        foreach ($tb_vieclam as $row) {
+            echo $row->tinh."<br/>";
+        }
+    	
+    }
+    public function timviec(Request $request){
+       $kt_vieclam = new kt_vieclam;
+       $tb_timviec = $kt_vieclam->timviec($request->tinh,$request->idloaiviec);
+       return view('pages.tuyendung.timviec',[
+                   'page'=>'tuyendung',
+                   'tb_timviec'=>$tb_timviec
+                    ]);
     }
 }

@@ -18,4 +18,27 @@ class kt_vieclam extends Model
     	$row_id = $this->where('idvieclam',$idvieclam)->get();
     	var_dump( $row_id);
     }
+    function get_tinh(){
+        $tb = $this->select("tinh")->groupBy('tinh')->get();
+        return $tb;
+    }
+    function timviec($tinh,$idloaiviec){
+        if ($tinh=='all'&&$idloaiviec=='all') {
+            $tb = $this->orderBy('ngaydang','DESC')->get();
+            return $tb;
+        }
+        elseif ($tinh=='all'&&$idloaiviec!='all') {
+            $tb = $this->where('idloaiviec',$idloaiviec)->orderBy('ngaydang','DESC')->get();
+            return $tb;
+        }
+        elseif ($tinh!='all'&&$idloaiviec=='all') {
+            $tb = $this->where('tinh',$tinh)->orderBy('ngaydang','DESC')->get();
+            return $tb;
+        }
+        else{
+            $tb = $this->where(['tinh'=>$tinh,'idloaiviec'=>$idloaiviec])->orderBy('ngaydang','DESC')->get();
+            return $tb;
+        }
+        
+    }
 }

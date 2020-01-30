@@ -174,13 +174,26 @@ li.nav-item.active {
                 </h3>
                 <p>Hãy tìm kiếm và lựa chọn công việc.</p>
 
-                <form action="index" method="get" class="ban-form row">
-                    <!-- <div class="col-md-3 banf">
-                        <input class="form-control" type="text" name="Name" placeholder="Name" required="">
-                    </div> -->
+                <form action="{{route('timviec')}}" method="post" class="ban-form row" role="form">
+                    {!! csrf_field() !!}
+                    <div class="col-md-4 banf">
+                        <select id="country12" class="form-control" name="tinh">
+                            <option value="all">Tất Cả</option>
+                            <?php
+                                foreach ($tb_tinh as $row) {
+                                    ?>
+                                        <option value="<?php echo $row->tinh?>"><?php echo $row->tinh?></option>
+                                    <?php
+                                }
+                            ?>
+                        </select>
+
+                    </div>
+
                     
-                    <div class="col-md-6 banf">
-                        <select id="country13" class="form-control" name="type_job">
+                    <div class="col-md-4 banf">
+                        <select id="country13" class="form-control" name="idloaiviec">
+                            <option value="all">Tất Cả</option>
                             <?php
                                 foreach ($tb_loaicongviec as $row) {
                                     ?>
@@ -191,8 +204,8 @@ li.nav-item.active {
                         </select>
 
                     </div>
-                    <div class="col-md-6 banf">
-                        <button class="btn1" type="submit">FIND JOB
+                    <div class="col-md-4 banf">
+                        <button class="btn1" type="submit">TÌM KIẾM
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -236,3 +249,7 @@ li.nav-item.active {
             </div>
         </div>
     </section>
+
+
+
+   
