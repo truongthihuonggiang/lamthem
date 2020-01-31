@@ -25,24 +25,21 @@ class Mycontroller extends Controller
             'tb_tinh'=>$tb_tinh,
             'tb_loaicongviec'=>$tb_loaicongviec]);	
 	}
-    public function page($page){
+    public function index(){
         $oc_nguoidung = new oc_nguoidung;
         $tb_oc_nguoidung = $oc_nguoidung->all();
-        if ($page=='index') {
-                $kt_vieclam = new kt_vieclam;
-                $tb_vieclam = $kt_vieclam->get_kt_vieclam();
-            
-                return view('layouts.content',[
-                            'index'=>$page,'tb_vieclam'=>$tb_vieclam,
-                            'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
-            }
-            $layouts_path = 'pages.'.$page;
-            if (file_exists($layouts_path)) {
-                echo "yes";
-            }
-            return view('pages.'.$page,['page'=>$page]);
-        
-    	
+        $kt_vieclam = new kt_vieclam;
+        $tb_vieclam = $kt_vieclam->get_kt_vieclam();
+        return view('layouts.content',[
+                    'index',
+                    'tb_vieclam'=>$tb_vieclam,
+                    'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
+    }
+    public function tuyendung(){
+        return view('pages.tuyendung',['page'=>'tuyendung']);
+    }
+    public function ungvien(){
+        return view('pages.ungvien',['page'=>'ungvien']);
     }
     public function login(Request $request){
     	$oc_nguoidung = new oc_nguoidung;

@@ -23,7 +23,8 @@
                         <div class="col-lg-4 widget_search" id="search_info_right">
                             <h3 class="j-b mb-3">Tìm kiếm</h3>
                             <div class="widget-content">
-                                <form action="#" method="post">
+                                <form action="{{route('timviec')}}" method="post">
+                                    {!! csrf_field() !!}
                                     <div class="form-group">
                                         <label class="mb-2">Nghề nghiệp</label>
 
@@ -32,7 +33,17 @@
                                             <?php
                                                 foreach ($tb_tinh as $row) {
                                             ?>
-                                            <option value="<?php echo $row->tinh?>"><?php echo $row->tinh?></option>
+                                            <option value="<?php echo $row->tinh?>"
+                                            <?php 
+                                                if (isset($_POST['tinh'])){
+                                                    if ($_POST['tinh']==$row->tinh){
+                                                        echo "selected='selected'";
+                                                    }
+                                                   
+                                                }
+                                            ?> >
+                                            <?php echo $row->tinh?>
+                                            </option>
                                             <?php
                                                 }
                                             ?>
@@ -46,13 +57,22 @@
                                             <?php
                                                 foreach ($tb_loaicongviec as $row) {
                                             ?>
-                                            <option value="<?php echo $row->idloaiviec?>"><?php echo $row->tenloaiviec?></option>
+                                            <option value="<?php echo $row->idloaiviec?>" 
+                                            <?php 
+                                                if (isset($_POST['idloaiviec'])){
+                                                    if ($_POST['idloaiviec']==$row->idloaiviec){
+                                                        echo "selected='selected'";
+                                                    }
+                                                   
+                                                }
+                                            ?> >
+                                            <?php echo $row->tenloaiviec?></option>
                                             <?php
                                                 }
                                             ?>
                                         </select>
                                     </div>
-                                    <input type="submit" value="Search">
+                                    <input type="submit" value="Tìm kiếm">
                                 </form>
                             </div>
                         </div>
@@ -60,7 +80,7 @@
                     <div class="col-lg-8 job_info_left" id="job_info_left">
                         <!--/ Emply List -->
                         <?php
-                            if (isset($tb_timviec)) {
+                            if (isset($tb_timviec)&&count($tb_timviec)>0) {
                                 foreach ($tb_timviec as $row) {
                         ?>
                         <div class="emply-resume-list row mb-3">
@@ -85,6 +105,23 @@
                         </div>
                         <?php
                                 }
+                            }
+                            else{
+                                $tinh="";
+                                $tenloaiviec="";
+                                if (isset($_POST['tinh'])&&isset($_POST['idloaiviec'])) {
+                                    foreach ($tb_tinh as $row) {
+                                        if ($row->tinh==$_POST['tinh']) {
+                                            $tinh = " ở ".$row->tinh;
+                                        }
+                                    }
+                                    foreach ($tb_loaicongviec as $row) {
+                                        if ($row->idloaiviec==$_POST['idloaiviec']) {
+                                            $tenloaiviec = $row->tenloaiviec;
+                                        }
+                                    }
+                                }
+                                echo "Không tìm thấy công việc ".$tenloaiviec.$tinh;
                             }
                         ?>
                         

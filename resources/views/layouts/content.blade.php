@@ -29,6 +29,7 @@
                                         <!--/job1-->
                                         <?php
                                             $noidung = $tb_vieclam;
+                                            if (count($noidung)>0) {
                                             foreach ($noidung as $row)
                                             {
                                                 ?>
@@ -39,7 +40,7 @@
                                                     </div>
                                                     <div class="job-single-sec">
                                                     <h4>
-                                                        <a href="#"><?php echo $row->tenvieclam?></a>
+                                                        <a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a>
                                                     </h4>
                                                     <p class="my-2">
                                                     <?php 
@@ -68,6 +69,7 @@
                                             </div>
                                         </div>
                                                 <?php
+                                                }
                                             }
                                         ?>
                                         

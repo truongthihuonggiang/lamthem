@@ -30,7 +30,10 @@ Route::post('login',[
 	'uses'=>'Mycontroller@login'
 ]);
 
-Route::get('{page}','Mycontroller@page');
+Route::get('index',['as'=>'index','uses'=>'Mycontroller@index']);
+Route::get('tuyendung','Mycontroller@tuyendung');
+Route::get('ungvien','Mycontroller@ungvien');
+// Route::get('{page}','Mycontroller@page');
 
 Route::get('chitietvieclam/{id}',[
 	'as'=>'chitietvieclam',

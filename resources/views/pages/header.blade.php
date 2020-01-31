@@ -112,7 +112,7 @@ li.nav-item.active {
     </div>
     <ol class="breadcrumb justify-content-left">
         <li class="breadcrumb-item">
-            <a href="index">Trang chủ</a>
+            <a href="{{route('index')}}">Trang chủ</a>
         </li>
         <li class="breadcrumb-item active">
         <?php
