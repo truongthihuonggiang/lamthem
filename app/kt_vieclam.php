@@ -14,9 +14,29 @@ class kt_vieclam extends Model
     	$tb_vieclam = DB::select('select * from kt_vieclam order by ngaydang DESC limit 10');
     	return $tb_vieclam;
     }
-    function get_id_vieclam($idvieclam){
-    	$row_id = $this->where('idvieclam',$idvieclam)->get();
-    	var_dump( $row_id);
+    function chitietvieclam($idvieclam){
+        $result = array();
+    	$row_id = $this->all();
+        foreach ($row_id as $row) {
+            if (md5($row->idvieclam)==$idvieclam) {
+                $result[] = $row;
+            }
+        }
+    	return $result;
+    }
+    function chitietvieclam_tacgia($idvieclam){
+        $result = array();
+        $tb_vieclam = $this->chitietvieclam($idvieclam);
+        foreach ($tb_vieclam as $row) {
+            $idtacgia = $row['idtacgia'];
+        }
+        $tb_tacgia = $this->where('idtacgia','=',$idtacgia)->orderBy('ngaydang','DESC')->get();
+        foreach ($tb_tacgia as $row) {
+           if (md5($row->idvieclam)!=$idvieclam) {
+              $result[] = $row;
+           }
+        }
+        return $result;
     }
     function get_tinh(){
         $tb = $this->select("tinh")->groupBy('tinh')->get();

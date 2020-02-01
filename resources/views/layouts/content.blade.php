@@ -65,7 +65,7 @@
                                             <div class="col-md-3 job-single-time text-right">
                                                 <span class="job-time">
                                                     <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
-                                                <a href="{{'chitietvieclam/'.$row->idvieclam}}" class="aply-btn" >Đăng ký</a>
+                                                    <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
                                             </div>
                                         </div>
                                                 <?php

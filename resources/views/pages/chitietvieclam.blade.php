@@ -62,7 +62,7 @@ if (isset($tb_vieclam)) {
                             	}
                             	else
                             	{
-                            		echo "Không xác định";
+                            		echo "Không có thông tin";
                             	}
                             ?>	
                             </a></h4>
@@ -74,7 +74,13 @@ if (isset($tb_vieclam)) {
                             <i class="far fa-file-alt"></i><span class="col-md-3 ml-2">Mô tả </span>
                         </div>
                         <div class="qual-info">
-                            <h4>{{$row->mota}}</h4>
+                            <h4>
+                                @if(!empty($row->mota))
+                                    {{$row->mota}}
+                                @else
+                                    Không có thông tin
+                                @endif
+                            </h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -83,7 +89,13 @@ if (isset($tb_vieclam)) {
                             <i class="fas fa-dollar-sign"></i><span class="col-md-3 ml-2">Lương trọn gói </span>
                         </div>
                         <div class="qual-info">
-                            <h4>{{$row->luongtrongoi}}</h4>
+                            <h4>
+                                @if(!empty($row->luongtrongoi))
+                                    {{$row->luongtrongoi}}
+                                @else
+                                    Không có thông tin
+                                @endif
+                            </h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -92,7 +104,13 @@ if (isset($tb_vieclam)) {
                         <i class="fas fa-map-marker-alt"></i><span class="col-md-3 ml-2">Địa điểm </span>
                         </div>
                         <div class="qual-info">
-                            <h4>{{$row->phuongxa.' '.$row->thanhpho.', '.$row->tinh}}</h4>
+                            <h4>
+                                @if(!empty($row->tinh))
+                                    {{$row->phuongxa.' '.$row->thanhpho.', '.$row->tinh}}
+                                @else
+                                    Không có thông tin
+                                @endif
+                            </h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -101,11 +119,19 @@ if (isset($tb_vieclam)) {
                             <i class="far fa-clock"></i><span class="col-md-3 ml-2">Thời gian tuyển dụng</span>
                         </div>
                         <div class="qual-info" style="border-bottom: none;">
-                            <h4>{{$row->ngaybatdau.' - '.$row->ngayketthuc}}</h4>
+                            <h4>
+                                @if(!empty($row->ngaybatdau)||!empty($row->ngayketthuc))
+                                    {{$row->ngaybatdau.' - '.$row->ngayketthuc}}
+                                @else
+                                    Không có thông tin
+                                @endif
+                            </h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                   
+                    <div class="col-md-12 qual-grid mt-5">
+                        <a href="" class="aply-btn" style=" margin-left: 40%; padding: 0.5em 3em; background: #145A32;">Đăng ký</a> 
+                    </div>
                 </div>
                 <!--row -->
 				<!---728x90--->
@@ -118,28 +144,29 @@ if (isset($tb_vieclam)) {
 				<!---728x90--->
                 <!--/history -->
                 <div class="candidate-history-info mt-5">
-                    <h5 class="j-b mb-5">Jobs from Business Network</h5>
+                    <h5 class="j-b mb-5">Công việc tuyển dụng khác từ người tuyển</h5>
                     <div class="candidate-story-grid">
 
                         <!--/job1-->
-
-                        <div class="job-post-main row">
+                        @if(isset($tb_vieclam_tacgia)&&count($tb_vieclam_tacgia)>0)
+                        @foreach($tb_vieclam_tacgia as $row)
+                        <div class="job-post-main row mt-2">
                             <div class="col-md-9 job-post-info text-left">
                                 <div class="job-post-icon">
                                     <i class="fas fa-briefcase"></i>
                                 </div>
                                 <div class="job-single-sec">
                                     <h4>
-                                        <a href="#">User Interface Project Manager</a>
+                                        <a href="#">{{$row->tenvieclam}}</a>
                                     </h4>
-                                    <p class="my-2">Technology Management Consulting</p>
+                                    <p class="my-2">{{$row->idtacgia}}</p>
                                     <ul class="job-list-info d-flex">
                                         <li>
                                             <i class="fas fa-briefcase"></i> Comera</li>
                                         <li>
                                             <i class="fas fa-map-marker-alt"></i> California</li>
                                         <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
+                                            <i class="fas fa-dollar-sign"></i> {{$row->luongtrongoi}}</li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
@@ -150,223 +177,11 @@ if (isset($tb_vieclam)) {
                                 <a href="#" class="aply-btn ">Appy Now</a>
                             </div>
                         </div>
+                        @endforeach
+                        @else
+                            Không có thông tin nào khác từ tác giả
+                        @endif
                         <!--//job1-->
-                        <!--/job2-->
-
-                        <div class="job-post-main row my-3">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">
-                                            Regional Sales Manager</a>
-                                    </h4>
-                                    <p class="my-2">Company Name goes here</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Comera</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> California</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Part Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job2-->
-                        <!--/job3-->
-
-                        <div class="job-post-main row">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">
-                                            Web Designer / Developer</a>
-                                    </h4>
-                                    <p class="my-2">Company Name goes here</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Chicago</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> California</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Full Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job3-->
-                        <!--/job4-->
-
-                        <div class="job-post-main row mt-3">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">
-                                            Marketing Director</a>
-                                    </h4>
-                                    <p class="my-2">Technology Management Consulting</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Rennes</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> France</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Full Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job4-->
-                        <!--/job1-->
-
-                        <div class="job-post-main row mt-3">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">Developer for Site Maintenance </a>
-                                    </h4>
-                                    <p class="my-2">Company nName gose here</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Comera</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> California</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Part Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job1-->
-                        <!--/job2-->
-
-                        <div class="job-post-main row my-3">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">
-                                            Content Writer and Speaker</a>
-                                    </h4>
-                                    <p class="my-2">Company Name goes here</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Comera</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> California</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 200000 - 100000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Part Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job2-->
-                        <!--/job3-->
-
-                        <div class="job-post-main row">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">
-                                            Web Designer / Developer</a>
-                                    </h4>
-                                    <p class="my-2">Company Name goes here</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Chicago</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> California</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Full Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job3-->
-                        <!--/job4-->
-
-                        <div class="job-post-main row mt-3">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                    <h4>
-                                        <a href="#">
-                                            Marketing Director</a>
-                                    </h4>
-                                    <p class="my-2">Technology Management Consulting</p>
-                                    <ul class="job-list-info d-flex">
-                                        <li>
-                                            <i class="fas fa-briefcase"></i> Rennes</li>
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> France</li>
-                                        <li>
-                                            <i class="fas fa-dollar-sign"></i> 300000 - 500000 / Annum</li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 job-single-time text-right">
-                                <span class="job-time">
-                                    <i class="far fa-heart"></i> Full Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
-                            </div>
-                        </div>
-                        <!--//job4-->
                     </div>
                     <!---//network-->
                 </div>

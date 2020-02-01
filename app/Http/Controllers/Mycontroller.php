@@ -60,23 +60,17 @@ class Mycontroller extends Controller
     }
     public function chitietvieclam($id) {
     	$kt_vieclam = new kt_vieclam;
-    	$tb_vieclam = $kt_vieclam->where('idvieclam',$id)->get();
+    	$tb_vieclam = $kt_vieclam->chitietvieclam($id); //$kt_vieclam->where('idvieclam',$id)->get();
+        $tb_vieclam_tacgia = $kt_vieclam->chitietvieclam_tacgia($id); 
     	$oc_nguoidung = new oc_nguoidung;
     	$tb_oc_nguoidung = $oc_nguoidung->all();
 
     	return view('pages.chitietvieclam',
             ['page'=>'tuyendung',
             'tb_vieclam'=>$tb_vieclam,
-            'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
+            'tb_oc_nguoidung'=>$tb_oc_nguoidung,
+            'tb_vieclam_tacgia'=>$tb_vieclam_tacgia]);
 
-    }
-    public function test(){
-    	$kt_vieclam = new kt_vieclam;
-    	$tb_vieclam = $kt_vieclam->get_tinh();
-        foreach ($tb_vieclam as $row) {
-            echo $row->tinh."<br/>";
-        }
-    	
     }
     public function timviec(Request $request){
        $kt_vieclam = new kt_vieclam;
@@ -85,5 +79,17 @@ class Mycontroller extends Controller
                    'page'=>'tuyendung',
                    'tb_timviec'=>$tb_timviec
                     ]);
+    }
+
+
+
+    public function test(){
+        $kt_vieclam = new kt_vieclam;
+        $tb_vieclam = $kt_vieclam->chitietvieclam(7142);
+        var_dump($tb_vieclam);
+        foreach ($tb_vieclam as $row) {
+            echo $row->idvieclam."<br/>";
+        }
+        
     }
 }
