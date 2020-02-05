@@ -26,7 +26,7 @@
                                 <form action="{{route('timviec')}}" method="post">
                                     {!! csrf_field() !!}
                                     <div class="form-group">
-                                        <label class="mb-2">Nghề nghiệp</label>
+                                        <label class="mb-2">Tỉnh/Thành phố</label>
 
                                         <select class="form-control jb_1" name="tinh">
                                             <option value="all">Tất Cả</option>
@@ -50,7 +50,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-2">Tỉnh/Thành phố</label>
+                                        <label class="mb-2">Nghề nghiệp</label>
 
                                         <select class="form-control jb_2" name="idloaiviec">
                                             <option value="all">Tất Cả</option>
@@ -83,18 +83,30 @@
                             if (isset($tb_timviec)&&count($tb_timviec)>0) {
                                 foreach ($tb_timviec as $row) {
                         ?>
-                        <div class="emply-resume-list row mb-3">
+                       <div class="emply-resume-list row mb-3">
                             <div class="col-md-9 emply-info">
                                 <div class="emply-img">
                                     <img src="images/b1.jpg" alt="" class="img-fluid">
                                 </div>
                                 <div class="emply-resume-info">
                                     <h4><a href="employer_single.html"><?php echo $row->tenvieclam?></a></h4>
-                                    <h5 class="mt-2"><?php echo $row->idvieclam?></h5>
+                                    <h5 class="mt-2">
+                                    @if(isset($tb_oc_nguoidung)) 
+                                    @foreach($tb_oc_nguoidung as $row1)
+                                        @if($row1->idnguoidung==$row->idtacgia)
+                                            {{$row1->ten}}
+                                        @endif
+                                    @endforeach
+                                    @endif
+                                    </h5>
                                     <p><i class="fas fa-map-marker-alt"></i> <?php echo $row->nhaduong." ".$row->phuongxa." ".$row->tinh?></p>
                                     <ul class="links_bottom_emp mt-2">
-                                        <li><a href="employer_single.html"><i class="far fa-envelope"></i> <span class="icon_text"> Email this Job</span></a></li>
-                                        <li><a href="#"><i class="fas fa-eye"></i> <span class="icon_text"><?php echo $row->songuoi?></span></a></li>
+                                        <li><i class="far fa-user"></i> <span class="icon_text">{{$row->songuoi}}</span></li>
+                                        <li><i class="fas fa-clock"></i>
+                                        <span class="icon_text">
+                                            {{$row->ngaydang}}
+                                        </span>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>

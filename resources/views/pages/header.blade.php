@@ -26,19 +26,19 @@ li.nav-item.active {
                             </div>
                             <div class="col-md-3 sign-btn">
                                 <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                                        <i class="fas fa-lock"></i> Sign In</a>
+                                        <i class="fas fa-lock"></i>Đăng Nhập</a>
                             </div>
                             <div class="col-md-3 sign-btn">
                                 <a href="#" data-toggle="modal" data-target="#exampleModalCenter2">
-                                        <i class="far fa-user"></i> Register</a>
+                                        <i class="far fa-user"></i> Đăng Ký</a>
                             </div>
-                            <div class="search col-md-2">
+                            <!-- <div class="search col-md-2">
                                 <div class="mobile-nav-button">
                                     <button id="trigger-overlay" type="button">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <!-- open/close -->
+                                open/close
                                 <div class="overlay overlay-door">
                                     <button type="button" class="overlay-close">
                                         <i class="fa fa-times" aria-hidden="true"></i>
@@ -50,8 +50,8 @@ li.nav-item.active {
                                         </button>
                                     </form>
                                 </div>
-                                <!-- open/close -->
-                            </div>
+                                open/close
+                            </div> -->
                         </div>
                     </div>
                     <div class="clearfix"></div>

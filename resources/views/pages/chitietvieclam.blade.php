@@ -181,6 +181,7 @@ if (isset($tb_vieclam)) {
                                 @endif
                             </ul>
                         </div>
+                        @if(isset($_SESSION['login'])&&$_SESSION['login']==1)
                         <form action="#" method="post" class="row">
                             <div class="col-lg-6 emp-single-line">
                                 <div class="form-group">
@@ -188,10 +189,18 @@ if (isset($tb_vieclam)) {
                                     <textarea  required="required" placeholder="Nhận xét về công việc" wrap="hard" style="overflow-x: hidden; overflow-wrap: break-word; height: 58px; resize: vertical; "></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn-primary" style="border: none; padding:0.3em 1.3em; outline: none;">Gửi</button>
+                                    <button type="submit" class="btn-primary" style="border: none; padding:0.3em 1.3em; outline: none; cursor: pointer;">Gửi</button>
                                 </div>
                             </div>
                         </form>
+                        @else
+                        <div class="top-vl">
+                        <div class="col-md-3 sign-btn">
+                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fas fa-lock mr-2"></i>Đăng nhập để bình luận</a>
+                        </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <!-- //binh luan viec lam -->
@@ -202,31 +211,39 @@ if (isset($tb_vieclam)) {
                         <!--/job1-->
                         @if(isset($tb_vieclam_tacgia)&&count($tb_vieclam_tacgia)>0)
                         @foreach($tb_vieclam_tacgia as $row)
-                        <div class="job-post-main row mt-2">
+                        <div class="job-post-main row my-3">
                             <div class="col-md-9 job-post-info text-left">
                                 <div class="job-post-icon">
                                     <i class="fas fa-briefcase"></i>
                                 </div>
                                 <div class="job-single-sec">
                                     <h4>
-                                        <a href="#">{{$row->tenvieclam}}</a>
+                                        <a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a>
                                     </h4>
-                                    <p class="my-2">{{$row->idtacgia}}</p>
+                                    <p class="my-2">
+                                    <?php 
+                                        foreach ($tb_oc_nguoidung as $row1) {
+                                        if ($row1->idnguoidung==$row->idtacgia) {
+                                            echo $row1->ten;
+                                            }
+                                        }
+                                    ?>
+                                    </p>
                                     <ul class="job-list-info d-flex">
                                         <li>
-                                            <i class="fas fa-briefcase"></i> Comera</li>
+                                            <i class="fas fa-user"></i><?php echo "so luong :".$row->songuoi?></li>
                                         <li>
-                                            <i class="fas fa-map-marker-alt"></i> California</li>
+                                            <i class="fas fa-map-marker-alt"></i><?php echo $row->thanhpho."-".$row->tinh?></li>
                                         <li>
-                                            <i class="fas fa-dollar-sign"></i> {{$row->luongtrongoi}}</li>
+                                            <i class="fas fa-dollar-sign"></i> <?php echo $row->luongtrongoi?></li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="col-md-3 job-single-time text-right">
                                 <span class="job-time">
-                                    <i class="far fa-heart"></i> Full Time</span>
-                                <a href="#" class="aply-btn ">Appy Now</a>
+                                <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
+                                <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
                             </div>
                         </div>
                         @endforeach

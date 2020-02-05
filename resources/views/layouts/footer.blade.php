@@ -8,10 +8,10 @@
             <div class="row footer-top">
                 <div class="col-lg-3 footer-grid-wthree-w3ls">
                     <div class="footer-title">
-                        <h3>About Us</h3>
+                        <h3>Liên hệ với chúng tôi</h3>
                     </div>
                     <div class="footer-text">
-                        <p>Curabitur non nulla sit amet nislinit tempus convallis quis ac lectus. lac inia eget consectetur sed, convallis at tellus. Nulla porttitor accumsana tincidunt.</p>
+                        <p>Luôn sẵn sàng phản hồi ý kiến, đóng góp của các bạn. Xin vui lòng liên hệ với chúng tôi :</p>
                         <ul class="footer-social text-left mt-lg-4 mt-3">
 
                             <li class="mx-2">
@@ -49,50 +49,36 @@
                 </div>
                 <div class="col-lg-3 footer-grid-wthree-w3ls">
                     <div class="footer-title">
-                        <h3>Get in touch</h3>
+                        <h3>Liên hệ</h3>
                     </div>
                     <div class="contact-info">
-                        <h4>Location :</h4>
-                        <p>0926k 4th block building, king Avenue, New York City.</p>
+                        <h4>Vị trí :</h4>
+                        <p>567 Lê Duẩn, Buôn Ma Thuột, Đăk Lăk.</p>
                         <div class="phone">
-                            <h4>Contact :</h4>
-                            <p>Phone : +121 098 8907 9987</p>
+                            <h4>Liên lạc :</h4>
+                            <p>Điện thoại : +84 326699393</p>
                             <p>Email :
-                                <a href="mailto:info@example.com">info@example.com</a>
+                                <a href="mailto:info@example.com">hainguyenduy3498@gmail.com</a>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 footer-grid-wthree-w3ls">
                     <div class="footer-title">
-                        <h3>Quick Links</h3>
+                        <h3>Đường dẫn nhanh</h3>
                     </div>
                     <ul class="links">
+                        @if(isset($nav))
+                        @foreach($nav as $row)
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{route($row->link)}}">{{$row->name}}</a>
                         </li>
-                        <li>
-                            <a href="about.html">About</a>
-                        </li>
-                        <li>
-                            <a href="404.html">Error</a>
-                        </li>
-                        <li>
-                            <a href="pricing.html">Job Packages</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact Us</a>
-                        </li>
+                        @endforeach
+                        @endif
                     </ul>
                     <ul class="links">
                         <li>
-                            <a href="how.html">How it works</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Support</a>
-                        </li>
-                        <li>
-                            <a href="employer_list.html">For Employers</a>
+                            <a href="how.html">Cá nhân</a>
                         </li>
                     </ul>
 
@@ -100,12 +86,12 @@
                 </div>
                 <div class="col-lg-3 footer-grid-wthree-w3ls">
                     <div class="footer-title">
-                        <h3>Sign up for your offers</h3>
+                        <h3>Đăng ký để nhận ưu đãi</h3>
                     </div>
                     <div class="footer-text">
-                        <p>By subscribing to our mailing list you will always get latest news and updates from us.</p>
+                        <p>Nhập email để luôn nhận được thông tin cập nhất mới nhất từ chúng tôi.</p>
                         <form action="#" method="post">
-                            <input class="form-control" type="email" name="Email" placeholder="Enter your email..." required="">
+                            <input class="form-control" type="email" name="Email" placeholder="Nhập email..." required="">
                             <button class="btn2">
                                 <i class="far fa-envelope" aria-hidden="true"></i>
                             </button>
@@ -115,8 +101,8 @@
                 </div>
             </div>
             <div class="copyright mt-4">
-                <p class="copy-right text-center ">&copy; 2018 Replenish. All Rights Reserved | Design by
-                    <a href="http://w3layouts.com/"> W3layouts </a>
+                <p class="copy-right text-center ">&copy; 2018 Làm thêm | Thiết kế bởi
+                    <a href="#"> NDH </a>
                 </p>
             </div>
         </div>
@@ -155,7 +141,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary submit mb-4">Đăng nhập</button>
                             <p class="text-center pb-4">
-                                <a href="#" data-toggle="modal2" data-target="#exampleModalCenter"> Bạn không có tài khoản?</a>
+                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter2"> Bạn không có tài khoản?</a>
                             </p>
                         </form>
                     </div>
@@ -176,31 +162,28 @@
                 </div>
                 <div class="modal-body">
                     <div class="login px-4 mx-auto mw-100">
-                        <h5 class="text-center mb-4">Register Now</h5>
+                        <h5 class="text-center mb-4">Đăng Ký Ngay</h5>
                         <form action="#" method="post">
                             <div class="form-group">
-                                <label>First name</label>
+                                <label>Họ</label>
 
                                 <input type="text" class="form-control" id="validationDefault01" placeholder="" required="">
                             </div>
                             <div class="form-group">
-                                <label>Last name</label>
+                                <label>Tên</label>
                                 <input type="text" class="form-control" id="validationDefault02" placeholder="" required="">
                             </div>
 
                             <div class="form-group">
-                                <label class="mb-2">Password</label>
+                                <label class="mb-2">Mật khẩu</label>
                                 <input type="password" class="form-control" id="password1" placeholder="" required="">
                             </div>
                             <div class="form-group">
-                                <label>Confirm Password</label>
+                                <label>Xác nhận mật khẩu</label>
                                 <input type="password" class="form-control" id="password2" placeholder="" required="">
                             </div>
 
-                            <button type="submit" class="btn btn-primary submit mb-4">Register</button>
-                            <p class="text-center pb-4">
-                                <a href="#">By clicking Register, I agree to your terms</a>
-                            </p>
+                            <button type="submit" class="btn btn-primary submit mb-4">Đăng ký</button>
                         </form>
 
                     </div>

@@ -14,34 +14,51 @@ use View;
 class Mycontroller extends Controller
 {
 	
-	function __construct(){
-		$kt_nav = new kt_nav;
-		$nav = $kt_nav->get_nav();
-		$kt_vieclam = new kt_vieclam;
+	// function __construct(){
+	// 	$kt_nav = new kt_nav;
+	// 	$nav = $kt_nav->get_nav();
+	// 	$kt_vieclam = new kt_vieclam;
+ //        $tb_tinh = $kt_vieclam->get_tinh();
+ //        $kt_loaicongviec = new kt_loaicongviec;
+ //        $tb_loaicongviec = $kt_loaicongviec->all();
+	// 	View::share([
+ //            'nav'=>$nav,
+ //            'tb_tinh'=>$tb_tinh,
+ //            'tb_loaicongviec'=>$tb_loaicongviec]);	
+	// }
+    function view_share(){
+        $kt_nav = new kt_nav;
+        $nav = $kt_nav->get_nav();
+        $kt_vieclam = new kt_vieclam;
         $tb_tinh = $kt_vieclam->get_tinh();
         $kt_loaicongviec = new kt_loaicongviec;
         $tb_loaicongviec = $kt_loaicongviec->all();
-		View::share([
+        return View::share([
             'nav'=>$nav,
             'tb_tinh'=>$tb_tinh,
-            'tb_loaicongviec'=>$tb_loaicongviec]);	
-	}
+            'tb_loaicongviec'=>$tb_loaicongviec]);
+    }
     public function index(){
         $oc_nguoidung = new oc_nguoidung;
         $tb_oc_nguoidung = $oc_nguoidung->all();
         $kt_vieclam = new kt_vieclam;
         $tb_vieclam = $kt_vieclam->get_kt_vieclam();
+        $tb_vieclamthem = $kt_vieclam->vieclamthem();
         return view('layouts.content',[
                     'index',
                     'tb_vieclam'=>$tb_vieclam,
-                    'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
+                    'tb_oc_nguoidung'=>$tb_oc_nguoidung,
+                    'tb_vieclamthem'=>$tb_vieclamthem]);
     }
     public function tuyendung(){
         $kt_vieclam = new kt_vieclam;
         $tb_timviec = $kt_vieclam->timviec('all','all');
+        $oc_nguoidung = new oc_nguoidung;
+        $tb_oc_nguoidung = $oc_nguoidung->all();
         return view('pages.tuyendung',[
             'page'=>'tuyendung',
-            'tb_timviec'=>$tb_timviec]);
+            'tb_timviec'=>$tb_timviec,
+            'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
     }
     public function ungvien(){
         return view('pages.ungvien',['page'=>'ungvien']);
@@ -82,10 +99,12 @@ class Mycontroller extends Controller
     public function timviec(Request $request){
        $kt_vieclam = new kt_vieclam;
        $tb_timviec = $kt_vieclam->timviec($request->tinh,$request->idloaiviec);
+       $oc_nguoidung = new oc_nguoidung;
+        $tb_oc_nguoidung = $oc_nguoidung->all();
        return view('pages.tuyendung.timviec',[
                    'page'=>'tuyendung',
-                   'tb_timviec'=>$tb_timviec
-                    ]);
+                   'tb_timviec'=>$tb_timviec,
+                    'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
     }
 
 

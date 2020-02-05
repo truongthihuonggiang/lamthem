@@ -93,13 +93,13 @@ li.nav-item.active {
                                 <a href="#" data-toggle="modal" data-target="#exampleModalCenter2">
                                     <i class="far fa-user"></i> Đăng Ký</a>
                             </div>
-                            <div class="search col-md-2">
+                            <!-- <div class="search col-md-2">
                                 <div class="mobile-nav-button">
                                     <button id="trigger-overlay" type="button">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <!-- open/close -->
+                                open/close
                                 <div class="overlay overlay-door">
                                     <button type="button" class="overlay-close">
                                         <i class="fa fa-times" aria-hidden="true"></i>
@@ -111,15 +111,15 @@ li.nav-item.active {
                                         </button>
                                     </form>
                                 </div>
-                                <!-- open/close -->
-                            </div>
+                                open/close
+                            </div> -->
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="logo">
                             <h1>
-                                <a class="navbar-brand" href="index.html">
+                                <a class="navbar-brand" href="{{route('index')}}">
                                     <i class="fab fa-codepen"></i> Làm thêm</a>
                             </h1>
                         </div>
@@ -224,7 +224,7 @@ li.nav-item.active {
                 <div class="row col-12 justify-content-center">
                     <div class="col-md-4 category_grid">
                         <div class="view view4 view-tenth">
-                        	<a href="">
+                        	<a href="#" data-toggle="modal" data-target="#exampleModalCenter">
                             <div class="category_text_box">
                                 <i class="fas fa-bullhorn"></i>
                                 <h3>Đăng tin tuyển dụng </h3>
@@ -235,7 +235,7 @@ li.nav-item.active {
                     </div>
                     <div class="col-md-4 category_grid">
                         <div class="view view5 view-tenth">
-                        	<a href="">
+                        	<a href="#" data-toggle="modal" data-target="#exampleModalCenter">
                             <div class="category_text_box">
                                 <i class="fas fa-user"></i>
                                 <h3>Tạo hồ sơ cá nhân </h3>

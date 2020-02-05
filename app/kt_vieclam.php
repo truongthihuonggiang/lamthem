@@ -61,4 +61,8 @@ class kt_vieclam extends Model
         }
         
     }
+    function vieclamthem(){
+        $tb = $this->where('idloaiviec','9')->orderBy('ngaydang','DESC')->limit(10)->get();
+        return $tb;
+    }
 }
