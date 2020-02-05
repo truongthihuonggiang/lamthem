@@ -7,6 +7,7 @@ use App\kt_vieclam;
 use App\kt_loaicongviec;
 use App\oc_nguoidung;
 use App\kt_nav;
+use App\kt_binhluan_vieclam;
 use View;
 
 
@@ -36,7 +37,11 @@ class Mycontroller extends Controller
                     'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
     }
     public function tuyendung(){
-        return view('pages.tuyendung',['page'=>'tuyendung']);
+        $kt_vieclam = new kt_vieclam;
+        $tb_timviec = $kt_vieclam->timviec('all','all');
+        return view('pages.tuyendung',[
+            'page'=>'tuyendung',
+            'tb_timviec'=>$tb_timviec]);
     }
     public function ungvien(){
         return view('pages.ungvien',['page'=>'ungvien']);
@@ -64,12 +69,14 @@ class Mycontroller extends Controller
         $tb_vieclam_tacgia = $kt_vieclam->chitietvieclam_tacgia($id); 
     	$oc_nguoidung = new oc_nguoidung;
     	$tb_oc_nguoidung = $oc_nguoidung->all();
-
+        $kt_binhluan_vieclam = new kt_binhluan_vieclam;
+        $tb_binhluan = $kt_binhluan_vieclam->tb_binhluan($id);
     	return view('pages.chitietvieclam',
             ['page'=>'tuyendung',
             'tb_vieclam'=>$tb_vieclam,
             'tb_oc_nguoidung'=>$tb_oc_nguoidung,
-            'tb_vieclam_tacgia'=>$tb_vieclam_tacgia]);
+            'tb_vieclam_tacgia'=>$tb_vieclam_tacgia,
+            'tb_binhluan'=>$tb_binhluan]);
 
     }
     public function timviec(Request $request){
@@ -84,11 +91,12 @@ class Mycontroller extends Controller
 
 
     public function test(){
-        $kt_vieclam = new kt_vieclam;
-        $tb_vieclam = $kt_vieclam->chitietvieclam(7142);
-        var_dump($tb_vieclam);
+        $kt_vieclam = new kt_binhluan_vieclam;
+        $tb_vieclam = $kt_vieclam->tb_binhluan(6305);
+        //var_dump($tb_vieclam);
         foreach ($tb_vieclam as $row) {
-            echo $row->idvieclam."<br/>";
+            echo $row->noidung."<br/>";
+            echo $row->idnguoidung;
         }
         
     }

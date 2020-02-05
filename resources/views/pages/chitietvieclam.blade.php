@@ -24,6 +24,9 @@
 .qual-info h4 a:hover{
 	color: #F39C12;
 }
+#noidung_binhluan{
+    color: #145A32;
+}
 </style>
 <?php
 if (isset($tb_vieclam)) {
@@ -51,21 +54,30 @@ if (isset($tb_vieclam)) {
                             <i class="far fa-building"></i><span class="col-md-3 ml-2">Người tuyển</span>
                         </div>
                         <div class="qual-info">
-                            <h4><a href="">
+                            <h4>
                             <?php
                             	if (isset($tb_oc_nguoidung)) {
                             		foreach ($tb_oc_nguoidung as $row1) {
                             			if ($row1->idnguoidung==$row->idtacgia) {
-                            				echo $row1->ten;
+                            				if (!empty($row1->ten)) {
+                                               $tacgia = $row1->ten;
+                                            }
+                                            
                             			}
                             		}
+                                    if (isset($tacgia)) {
+                                        echo $tacgia;
+                                    }
+                                    else{
+                                        echo "Không có thông tin";
+                                    }
                             	}
                             	else
                             	{
                             		echo "Không có thông tin";
                             	}
                             ?>	
-                            </a></h4>
+                            </h4>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -134,19 +146,59 @@ if (isset($tb_vieclam)) {
                     </div>
                 </div>
                 <!--row -->
-				<!---728x90--->
-                <!--/about -->
-                <!-- <div class="candidate-ab-info mt-5">
-                    <h5 class="j-b mb-3">Mo ta cong viec</h5>
-                    <p>{{$row->mota}}</p>
-                </div> -->
-                <!--// about -->
-				<!---728x90--->
-                <!--/history -->
+				
+                <!-- binh luan viec lam -->
+                <div class="main_grid_contact emp-single-page mt-5">
+                    <div class="form emp-single">
+                        <h4 class="mb-4 text-left">Bình luận việc làm</h4>
+                        <div class="col-lg-12">
+                            <ul style="list-style: none;">
+                                @if(isset($tb_binhluan))
+                                @foreach($tb_binhluan as $row)
+                                @if($row->congkhai==1)
+                                <li class="mb-5" style="">
+                                    @if(isset($tb_oc_nguoidung))
+                                    @foreach($tb_oc_nguoidung as $row1)
+                                    @if($row1->idnguoidung==$row->idnguoidung)
+                                        @if(!empty($row1->ten))
+                                        <?php $nguoidung_binhluan = $row1->ten?>
+                                        @endif
+                                    @endif
+                                    @endforeach
+                                    @endif
+                                    <h6>
+                                        @if(isset($nguoidung_binhluan))
+                                        {{$nguoidung_binhluan}}
+                                        @else
+                                        Không có thông tin
+                                        @endif
+                                    </h6>
+                                    <p>{{$row->ngaydang}}</p>
+                                    <i id="noidung_binhluan">{{$row->noidung}}</i>
+                                </li>
+                                @endif
+                                @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                        <form action="#" method="post" class="row">
+                            <div class="col-lg-6 emp-single-line">
+                                <div class="form-group">
+                                    <label>Nhập nhận xét</label>
+                                    <textarea  required="required" placeholder="Nhận xét về công việc" wrap="hard" style="overflow-x: hidden; overflow-wrap: break-word; height: 58px; resize: vertical; "></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn-primary" style="border: none; padding:0.3em 1.3em; outline: none;">Gửi</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- //binh luan viec lam -->
+                <!-- cong viec khac tu tac gia -->
                 <div class="candidate-history-info mt-5">
                     <h5 class="j-b mb-5">Công việc tuyển dụng khác từ người tuyển</h5>
                     <div class="candidate-story-grid">
-
                         <!--/job1-->
                         @if(isset($tb_vieclam_tacgia)&&count($tb_vieclam_tacgia)>0)
                         @foreach($tb_vieclam_tacgia as $row)
@@ -183,39 +235,8 @@ if (isset($tb_vieclam)) {
                         @endif
                         <!--//job1-->
                     </div>
-                    <!---//network-->
                 </div>
-                <div class="main_grid_contact emp-single-page mt-5">
-                    <div class="form emp-single">
-                        <h4 class="mb-4 text-left">Contact Business Network</h4>
-                        <form action="#" method="post" class="row">
-                            <div class="col-lg-6 emp-single-line">
-                                <div class="form-group">
-                                    <label class="my-2">Name</label>
-                                    <input class="form-control" type="text" name="Name" placeholder="" required="">
-                                </div>
-                                <div class="form-group">
-                                    <label class="my-2">Phone Number</label>
-                                    <input class="form-control" type="text" name="Phone" placeholder="" required="">
-                                </div>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input class="form-control" type="email" name="Email" placeholder="" required="">
-                                </div>
-
-                            </div>
-                            <div class="col-lg-6 emp-single-line">
-                                <div class="form-group">
-                                    <label>Message</label>
-                                    <textarea id="textarea" placeholder=""></textarea>
-                                </div>
-                                <div class="input-group1">
-                                    <input class="form-control" type="submit" value="Submit Mail">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <!--// cong viec khac tu tac gia -->
             </div>
         </div>
 

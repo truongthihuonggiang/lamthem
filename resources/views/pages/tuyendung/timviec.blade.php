@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="emply-resume-info">
                                     <h4><a href="employer_single.html"><?php echo $row->tenvieclam?></a></h4>
-                                    <h5 class="mt-2"><?php echo $row->idtacgia?></h5>
+                                    <h5 class="mt-2"><?php echo $row->idvieclam?></h5>
                                     <p><i class="fas fa-map-marker-alt"></i> <?php echo $row->nhaduong." ".$row->phuongxa." ".$row->tinh?></p>
                                     <ul class="links_bottom_emp mt-2">
                                         <li><a href="employer_single.html"><i class="far fa-envelope"></i> <span class="icon_text"> Email this Job</span></a></li>
@@ -100,7 +100,7 @@
                                 <div class="clearfix"></div>
                             </div>
                             <div class="col-md-3 emp_btn text-right">
-                                <a href="#" title="">3 Open Position</a>
+                                <a href="{{url('chitietvieclam/'.md5($row->idvieclam))}}" title="" class="aply-btn">Đăng ký</a>
                             </div>
                         </div>
                         <?php
