@@ -111,8 +111,17 @@
 
     <!--model-forms-->
     <!--/Login-->
+    
+    
+    @if(session('er_user'))
+    <script type="text/javascript">
+        alert('{{session('er_user')}}');
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+    </script>
+    <div  class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog"  style="display: block;">
+    @else
+    <div  class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+    @endif
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -141,7 +150,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary submit mb-4">Đăng nhập</button>
                             <p class="text-center pb-4">
-                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter2"> Bạn không có tài khoản?</a>
+                                <a href="{{route('dangky')}}"> Bạn không có tài khoản?</a>
                             </p>
                         </form>
                     </div>
@@ -152,43 +161,3 @@
     </div>
     <!--//Login-->
     <!--/Register-->
-    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="login px-4 mx-auto mw-100">
-                        <h5 class="text-center mb-4">Đăng Ký Ngay</h5>
-                        <form action="#" method="post">
-                            <div class="form-group">
-                                <label>Họ</label>
-
-                                <input type="text" class="form-control" id="validationDefault01" placeholder="" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Tên</label>
-                                <input type="text" class="form-control" id="validationDefault02" placeholder="" required="">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="mb-2">Mật khẩu</label>
-                                <input type="password" class="form-control" id="password1" placeholder="" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Xác nhận mật khẩu</label>
-                                <input type="password" class="form-control" id="password2" placeholder="" required="">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary submit mb-4">Đăng ký</button>
-                        </form>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>

@@ -90,7 +90,7 @@ li.nav-item.active {
                                     <i class="fas fa-lock"></i> Đăng Nhập</a>
                             </div>
                             <div class="col-md-3 sign-btn">
-                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter2">
+                                <a href="{{route('dangky')}}" ><!--  data-toggle="modal" data-target="#exampleModalCenter2" -->
                                     <i class="far fa-user"></i> Đăng Ký</a>
                             </div>
                             <!-- <div class="search col-md-2">

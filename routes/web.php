@@ -1,5 +1,4 @@
 <?php
-use App\Http\Controllers\Mycontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,9 +9,7 @@ use App\Http\Controllers\Mycontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Chia se du lieu cho tat ca cac view
-$Mycontroller = new Mycontroller;
-$Mycontroller->view_share();
+Route::get('dangky',['as'=>'dangky','uses'=>'Mycontroller@dangky']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +33,7 @@ Route::post('login',[
 Route::get('index',['as'=>'index','uses'=>'Mycontroller@index']);
 Route::get('tuyendung',['as'=>'tuyendung','uses'=>'Mycontroller@tuyendung']);
 Route::get('ungvien',['as'=>'ungvien','uses'=>'Mycontroller@ungvien']);
+Route::get('canhan',['as'=>'canhan','uses'=>'Mycontroller@canhan']);
 // Route::get('{page}','Mycontroller@page');
 
 Route::get('chitietvieclam/{id}',[

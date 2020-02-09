@@ -83,38 +83,41 @@
                             if (isset($tb_timviec)&&count($tb_timviec)>0) {
                                 foreach ($tb_timviec as $row) {
                         ?>
-                       <div class="emply-resume-list row mb-3">
-                            <div class="col-md-9 emply-info">
-                                <div class="emply-img">
-                                    <img src="images/b1.jpg" alt="" class="img-fluid">
-                                </div>
-                                <div class="emply-resume-info">
-                                    <h4><a href="employer_single.html"><?php echo $row->tenvieclam?></a></h4>
-                                    <h5 class="mt-2">
-                                    @if(isset($tb_oc_nguoidung)) 
-                                    @foreach($tb_oc_nguoidung as $row1)
-                                        @if($row1->idnguoidung==$row->idtacgia)
-                                            {{$row1->ten}}
-                                        @endif
-                                    @endforeach
-                                    @endif
-                                    </h5>
-                                    <p><i class="fas fa-map-marker-alt"></i> <?php echo $row->nhaduong." ".$row->phuongxa." ".$row->tinh?></p>
-                                    <ul class="links_bottom_emp mt-2">
-                                        <li><i class="far fa-user"></i> <span class="icon_text">{{$row->songuoi}}</span></li>
-                                        <li><i class="fas fa-clock"></i>
-                                        <span class="icon_text">
-                                            {{$row->ngaydang}}
-                                        </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 emp_btn text-right">
-                                <a href="{{url('chitietvieclam/'.md5($row->idvieclam))}}" title="" class="aply-btn">Đăng ký</a>
-                            </div>
-                        </div>
+                        <div class="job-post-main row my-3">
+                                                <div class="col-md-9 job-post-info text-left">
+                                                    <div class="job-post-icon">
+                                                        <i class="fas fa-briefcase"></i>
+                                                    </div>
+                                                    <div class="job-single-sec">
+                                                    <h4>
+                                                        <a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a>
+                                                    </h4>
+                                                    <p class="my-2">
+                                                    <?php 
+                                                        foreach ($tb_oc_nguoidung as $row1) {
+                                                            if ($row1->idnguoidung==$row->idtacgia) {
+                                                               echo $row1->ten;
+                                                            }
+                                                        }
+                                                    ?>
+                                                    </p>
+                                                    <ul class="job-list-info d-flex">
+                                                        <li>
+                                                            <i class="fas fa-user"></i><?php echo "so luong :".$row->songuoi?></li>
+                                                        <li>
+                                                            <i class="fas fa-map-marker-alt"></i><?php echo $row->thanhpho."-".$row->tinh?></li>
+                                                        <li>
+                                                            <i class="fas fa-dollar-sign"></i> <?php echo $row->luongtrongoi?></li>
+                                                    </ul>
+                                                    </div>
+                                                <div class="clearfix"></div>
+                                                </div>
+                                            <div class="col-md-3 job-single-time text-right">
+                                                <span class="job-time">
+                                                    <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
+                                                    <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
+                                            </div>
+                                        </div>
                         <?php
                                 }
                             }
@@ -136,6 +139,7 @@
                                 echo "Không tìm thấy công việc ".$tenloaiviec.$tinh;
                             }
                         ?>
+                        <!-- content -->
                         
                         <!--// Emply List -->
                     </div>

@@ -14,18 +14,18 @@ use View;
 class Mycontroller extends Controller
 {
 	
-	// function __construct(){
-	// 	$kt_nav = new kt_nav;
-	// 	$nav = $kt_nav->get_nav();
-	// 	$kt_vieclam = new kt_vieclam;
- //        $tb_tinh = $kt_vieclam->get_tinh();
- //        $kt_loaicongviec = new kt_loaicongviec;
- //        $tb_loaicongviec = $kt_loaicongviec->all();
-	// 	View::share([
- //            'nav'=>$nav,
- //            'tb_tinh'=>$tb_tinh,
- //            'tb_loaicongviec'=>$tb_loaicongviec]);	
-	// }
+	function __construct(){
+		$kt_nav = new kt_nav;
+		$nav = $kt_nav->get_nav();
+		$kt_vieclam = new kt_vieclam;
+        $tb_tinh = $kt_vieclam->get_tinh();
+        $kt_loaicongviec = new kt_loaicongviec;
+        $tb_loaicongviec = $kt_loaicongviec->all();
+		View::share([
+            'nav'=>$nav,
+            'tb_tinh'=>$tb_tinh,
+            'tb_loaicongviec'=>$tb_loaicongviec]);	
+	}
     function view_share(){
         $kt_nav = new kt_nav;
         $nav = $kt_nav->get_nav();
@@ -39,16 +39,13 @@ class Mycontroller extends Controller
             'tb_loaicongviec'=>$tb_loaicongviec]);
     }
     public function index(){
+        $index ='index';
         $oc_nguoidung = new oc_nguoidung;
         $tb_oc_nguoidung = $oc_nguoidung->all();
         $kt_vieclam = new kt_vieclam;
         $tb_vieclam = $kt_vieclam->get_kt_vieclam();
-        $tb_vieclamthem = $kt_vieclam->vieclamthem();
-        return view('layouts.content',[
-                    'index',
-                    'tb_vieclam'=>$tb_vieclam,
-                    'tb_oc_nguoidung'=>$tb_oc_nguoidung,
-                    'tb_vieclamthem'=>$tb_vieclamthem]);
+        $tb_vieclamthem = $kt_vieclam->vieclamthem();        
+        return view('layouts.content',compact('index','tb_vieclam','tb_oc_nguoidung','tb_vieclamthem'));
     }
     public function tuyendung(){
         $kt_vieclam = new kt_vieclam;
@@ -77,7 +74,7 @@ class Mycontroller extends Controller
     		echo "Dang nhap";
     	}
     	else{
-    		echo "sai";
+    		return redirect()->back()->with('er_user','SAi ten dang nhap');
     	}
     }
     public function chitietvieclam($id) {
@@ -106,17 +103,15 @@ class Mycontroller extends Controller
                    'tb_timviec'=>$tb_timviec,
                     'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
     }
-
-
+    public function canhan(){
+        return "canhan";
+    }
+    public function dangky(){
+        return view('form.dangky');
+    }
 
     public function test(){
-        $kt_vieclam = new kt_binhluan_vieclam;
-        $tb_vieclam = $kt_vieclam->tb_binhluan(6305);
-        //var_dump($tb_vieclam);
-        foreach ($tb_vieclam as $row) {
-            echo $row->noidung."<br/>";
-            echo $row->idnguoidung;
-        }
         
+        return redirect('index')->with('error_user','sai ten dang nhap');
     }
 }

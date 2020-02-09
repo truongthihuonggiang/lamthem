@@ -31,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="{{asset('//fonts.googleapis.com/css?family=Quicksand:300,400,500,700')}}" rel="stylesheet">
 </head>
 
-<body>
+<body class="">
     <!-- header -->
     @if(isset($page))
         @include('pages.header')
