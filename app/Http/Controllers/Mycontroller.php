@@ -8,7 +8,9 @@ use App\kt_loaicongviec;
 use App\oc_nguoidung;
 use App\kt_nav;
 use App\kt_binhluan_vieclam;
+use App\kt_nguoidung_tuyendung;
 use View;
+use Illuminate\Support\Facades\DB;
 
 
 class Mycontroller extends Controller
@@ -48,14 +50,11 @@ class Mycontroller extends Controller
         return view('layouts.content',compact('index','tb_vieclam','tb_oc_nguoidung','tb_vieclamthem'));
     }
     public function tuyendung(){
-        $kt_vieclam = new kt_vieclam;
-        $tb_timviec = $kt_vieclam->timviec('all','all');
         $oc_nguoidung = new oc_nguoidung;
         $tb_oc_nguoidung = $oc_nguoidung->all();
-        return view('pages.tuyendung',[
-            'page'=>'tuyendung',
-            'tb_timviec'=>$tb_timviec,
-            'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
+        $kt_nguoidung_tuyendung = new kt_nguoidung_tuyendung;
+        $tb_nguoidung_tuyendung = $kt_nguoidung_tuyendung->get_nguoidung_tuyendung(); 
+        return view('pages.tuyendung',compact('tb_oc_nguoidung','tb_nguoidung_tuyendung'));
     }
     public function ungvien(){
         return view('pages.ungvien',['page'=>'ungvien']);
@@ -85,6 +84,9 @@ class Mycontroller extends Controller
     	$tb_oc_nguoidung = $oc_nguoidung->all();
         $kt_binhluan_vieclam = new kt_binhluan_vieclam;
         $tb_binhluan = $kt_binhluan_vieclam->tb_binhluan($id);
+        if (empty($tb_vieclam)) {
+            return view('errors.404');
+        }
     	return view('pages.chitietvieclam',
             ['page'=>'tuyendung',
             'tb_vieclam'=>$tb_vieclam,

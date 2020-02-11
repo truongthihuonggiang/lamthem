@@ -11,9 +11,7 @@
 */
 Route::get('dangky',['as'=>'dangky','uses'=>'Mycontroller@dangky']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['uses'=>'Mycontroller@index']);
 // Route::get('index',function(){
 // 	return view('layouts.content',['index'=>'index']);
 // });

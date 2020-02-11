@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use DB;
 
 
 class kt_vieclam extends Model
@@ -11,7 +10,7 @@ class kt_vieclam extends Model
     protected $table = 'kt_vieclam';
     public $timestamps = false;
     function get_kt_vieclam(){
-    	$tb_vieclam = DB::select('select * from kt_vieclam order by ngaydang DESC limit 10');
+    	$tb_vieclam = $this->orderBy('ngaydang','DESC')->paginate(10);
     	return $tb_vieclam;
     }
     function chitietvieclam($idvieclam){
@@ -27,6 +26,7 @@ class kt_vieclam extends Model
     function chitietvieclam_tacgia($idvieclam){
         $result = array();
         $tb_vieclam = $this->chitietvieclam($idvieclam);
+        if (count($tb_vieclam)>0) {
         foreach ($tb_vieclam as $row) {
             $idtacgia = $row['idtacgia'];
         }
@@ -35,6 +35,7 @@ class kt_vieclam extends Model
            if (md5($row->idvieclam)!=$idvieclam) {
               $result[] = $row;
            }
+        }
         }
         return $result;
     }
@@ -62,7 +63,7 @@ class kt_vieclam extends Model
         
     }
     function vieclamthem(){
-        $tb = $this->where('idloaiviec','9')->orderBy('ngaydang','DESC')->limit(10)->get();
+        $tb = $this->where('idloaiviec','9')->orderBy('ngaydang','DESC')->paginate(3);
         return $tb;
     }
 }

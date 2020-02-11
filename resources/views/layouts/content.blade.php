@@ -75,13 +75,16 @@
                                         
                                         <!--//job1-->
                                     </div>
+
                                     <div class="col-lg-4 text-info-sec">
                                         <img src="images/job-1.jpg" alt=" " class="img-fluid" />
                                     </div>
 
                                 </div>
                             </div>
+                            {{$noidung->links()}}
                         </div>
+
                         <!-- Viec lam them -->
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div class="menu-grids mt-4">
@@ -131,9 +134,11 @@
                                         @endforeach
                                         @endif
                                         <!--//job1-->
+                                        {{$tb_vieclamthem->links()}}
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <!-- Viec lam them -->
                     </div>
