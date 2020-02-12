@@ -174,7 +174,7 @@ li.nav-item.active {
                 </h3>
                 <p>Hãy tìm kiếm và lựa chọn công việc.</p>
 
-                <form action="{{route('timviec')}}" method="post" class="ban-form row" role="form">
+                <form action="{{route('timviec')}}" method="get" class="ban-form row" role="form">
                     {!! csrf_field() !!}
                     <div class="col-md-4 banf">
                         <select id="country12" class="form-control" name="tinh">

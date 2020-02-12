@@ -23,7 +23,7 @@
                         <div class="col-lg-4 widget_search" id="search_info_right">
                             <h3 class="j-b mb-3">Tìm kiếm</h3>
                             <div class="widget-content">
-                                <form action="{{route('timviec')}}" method="post">
+                                <form action="{{route('timviec')}}" method="get">
                                     {!! csrf_field() !!}
                                     <div class="form-group">
                                         <label class="mb-2">Tỉnh/Thành phố</label>
@@ -35,8 +35,8 @@
                                             ?>
                                             <option value="<?php echo $row->tinh?>"
                                             <?php 
-                                                if (isset($_POST['tinh'])){
-                                                    if ($_POST['tinh']==$row->tinh){
+                                                if (isset($_GET['tinh'])){
+                                                    if ($_GET['tinh']==$row->tinh){
                                                         echo "selected='selected'";
                                                     }
                                                    
@@ -59,8 +59,8 @@
                                             ?>
                                             <option value="<?php echo $row->idloaiviec?>" 
                                             <?php 
-                                                if (isset($_POST['idloaiviec'])){
-                                                    if ($_POST['idloaiviec']==$row->idloaiviec){
+                                                if (isset($_GET['idloaiviec'])){
+                                                    if ($_GET['idloaiviec']==$row->idloaiviec){
                                                         echo "selected='selected'";
                                                     }
                                                    
@@ -84,42 +84,39 @@
                                 foreach ($tb_timviec as $row) {
                         ?>
                         <div class="job-post-main row my-3">
-                                                <div class="col-md-9 job-post-info text-left">
-                                                    <div class="job-post-icon">
-                                                        <i class="fas fa-briefcase"></i>
-                                                    </div>
-                                                    <div class="job-single-sec">
-                                                    <h4>
-                                                        <a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a>
-                                                    </h4>
-                                                    <p class="my-2">
-                                                    <?php 
-                                                        foreach ($tb_oc_nguoidung as $row1) {
-                                                            if ($row1->idnguoidung==$row->idtacgia) {
-                                                               echo $row1->ten;
-                                                            }
-                                                        }
-                                                    ?>
-                                                    </p>
-                                                    <ul class="job-list-info d-flex">
-                                                        <li>
-                                                            <i class="fas fa-user"></i><?php echo "so luong :".$row->songuoi?></li>
-                                                        <li>
-                                                            <i class="fas fa-map-marker-alt"></i><?php echo $row->thanhpho."-".$row->tinh?></li>
-                                                        <li>
-                                                            <i class="fas fa-dollar-sign"></i> <?php echo $row->luongtrongoi?></li>
-                                                    </ul>
-                                                    </div>
-                                                <div class="clearfix"></div>
-                                                </div>
-                                            <div class="col-md-3 job-single-time text-right">
-                                                <span class="job-time">
-                                                    <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
-                                                    <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
-                                            </div>
-                                        </div>
+                            <div class="col-md-9 job-post-info text-left">
+                                <div class="job-post-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="job-single-sec">
+                                <h4><a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a></h4>
+                                <p class="my-2">
+                                <?php 
+                                    foreach ($tb_oc_nguoidung as $row1) {
+                                    if ($row1->idnguoidung==$row->idtacgia) {
+                                        echo $row1->ten;
+                                            }
+                                        }
+                                    ?>
+                                </p>
+                                    <ul class="job-list-info d-flex">
+                                        <li><i class="fas fa-user"></i><?php echo "so luong :".$row->songuoi?></li>
+                                        <li><i class="fas fa-map-marker-alt"></i><?php echo $row->thanhpho."-".$row->tinh?></li>
+                                        <li><i class="fas fa-dollar-sign"></i> <?php echo $row->luongtrongoi?></li>
+                                    </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-md-3 job-single-time text-right">
+                                    <span class="job-time">
+                                    <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
+                                    <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
+                                </div>
+                        </div>
+
                         <?php
                                 }
+                                echo $tb_timviec->links();
                             }
                             else{
                                 $tinh="";

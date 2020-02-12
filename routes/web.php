@@ -21,7 +21,7 @@ Route::post('timviec',[
 	'as'=>'timviec',
 	'uses'=>'Mycontroller@timviec'
 ]);
-
+Route::get('timviec',['as'=>'timviec','uses'=>'Mycontroller@timviec']);
 
 Route::post('login',[
 	'as'=>'login',

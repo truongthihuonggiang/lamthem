@@ -45,19 +45,19 @@ class kt_vieclam extends Model
     }
     function timviec($tinh,$idloaiviec){
         if ($tinh=='all'&&$idloaiviec=='all') {
-            $tb = $this->orderBy('ngaydang','DESC')->get();
+            $tb = $this->orderBy('ngaydang','DESC')->paginate(6)->setPath('timviec?tinh='.$tinh.'&idloaiviec='.$idloaiviec);
             return $tb;
         }
         elseif ($tinh=='all'&&$idloaiviec!='all') {
-            $tb = $this->where('idloaiviec',$idloaiviec)->orderBy('ngaydang','DESC')->get();
+            $tb = $this->where('idloaiviec',$idloaiviec)->orderBy('ngaydang','DESC')->paginate(6)->setPath('timviec?tinh='.$tinh.'&idloaiviec='.$idloaiviec);
             return $tb;
         }
         elseif ($tinh!='all'&&$idloaiviec=='all') {
-            $tb = $this->where('tinh',$tinh)->orderBy('ngaydang','DESC')->get();
+            $tb = $this->where('tinh',$tinh)->orderBy('ngaydang','DESC')->paginate(6)->setPath('timviec?tinh='.$tinh.'&idloaiviec='.$idloaiviec);
             return $tb;
         }
         else{
-            $tb = $this->where(['tinh'=>$tinh,'idloaiviec'=>$idloaiviec])->orderBy('ngaydang','DESC')->get();
+            $tb = $this->where(['tinh'=>$tinh,'idloaiviec'=>$idloaiviec])->orderBy('ngaydang','DESC')->paginate(6)->setPath('timviec?tinh='.$tinh.'&idloaiviec='.$idloaiviec);
             return $tb;
         }
         

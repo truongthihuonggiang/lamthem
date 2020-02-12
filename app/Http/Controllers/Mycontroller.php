@@ -50,11 +50,12 @@ class Mycontroller extends Controller
         return view('layouts.content',compact('index','tb_vieclam','tb_oc_nguoidung','tb_vieclamthem'));
     }
     public function tuyendung(){
+        $page = 'tuyendung';
         $oc_nguoidung = new oc_nguoidung;
         $tb_oc_nguoidung = $oc_nguoidung->all();
         $kt_nguoidung_tuyendung = new kt_nguoidung_tuyendung;
         $tb_nguoidung_tuyendung = $kt_nguoidung_tuyendung->get_nguoidung_tuyendung(); 
-        return view('pages.tuyendung',compact('tb_oc_nguoidung','tb_nguoidung_tuyendung'));
+        return view('pages.tuyendung',compact('page','tb_oc_nguoidung','tb_nguoidung_tuyendung'));
     }
     public function ungvien(){
         return view('pages.ungvien',['page'=>'ungvien']);
@@ -96,15 +97,19 @@ class Mycontroller extends Controller
 
     }
     public function timviec(Request $request){
-       $kt_vieclam = new kt_vieclam;
-       $tb_timviec = $kt_vieclam->timviec($request->tinh,$request->idloaiviec);
-       $oc_nguoidung = new oc_nguoidung;
+        $page = 'tuyendung';
+        $kt_vieclam = new kt_vieclam;
+        $tb_timviec = $kt_vieclam->timviec($request->tinh,$request->idloaiviec);
+        $oc_nguoidung = new oc_nguoidung;
         $tb_oc_nguoidung = $oc_nguoidung->all();
-       return view('pages.tuyendung.timviec',[
+        return view('pages.tuyendung.timviec',[
                    'page'=>'tuyendung',
                    'tb_timviec'=>$tb_timviec,
                     'tb_oc_nguoidung'=>$tb_oc_nguoidung]);
     }
+    // public function timviec(Request $rq){
+    //     echo $rq->tinh;
+    // }
     public function canhan(){
         return "canhan";
     }
