@@ -111,7 +111,7 @@ class Mycontroller extends Controller
     //     echo $rq->tinh;
     // }
     public function canhan(){
-        return "canhan";
+        return view("pages.canhan.canhan");
     }
     public function dangky(){
         return view('form.dangky');

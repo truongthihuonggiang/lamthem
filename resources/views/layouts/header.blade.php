@@ -224,7 +224,11 @@ li.nav-item.active {
                 <div class="row col-12 justify-content-center">
                     <div class="col-md-4 category_grid">
                         <div class="view view4 view-tenth">
+                            @if(isset($_SESSION['user']))
+                            <a href="{{route('login')}}">
+                            @else    
                         	<a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            @endif
                             <div class="category_text_box">
                                 <i class="fas fa-bullhorn"></i>
                                 <h3>Đăng tin tuyển dụng </h3>
@@ -235,7 +239,11 @@ li.nav-item.active {
                     </div>
                     <div class="col-md-4 category_grid">
                         <div class="view view5 view-tenth">
-                        	<a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            @if(isset($_SESSION['user']))
+                            <a href="{{route('login')}}">
+                            @else    
+                            <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            @endif
                             <div class="category_text_box">
                                 <i class="fas fa-user"></i>
                                 <h3>Tạo hồ sơ cá nhân </h3>
