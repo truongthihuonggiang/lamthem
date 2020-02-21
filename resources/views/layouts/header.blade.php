@@ -73,6 +73,9 @@ li.nav-item.active {
 .view5:hover h3{
 	color: #239B56;
 }
+.nav-item:hover{
+    background: #F39C12;
+}
 </style> 
     <!-- banner-inner -->
     <div id="demo-1" data-zs-src='["images/1.jpg", "images/2.jpg","images/3.jpg", "images/4.jpg"]' data-zs-overlay="dots">

@@ -15,7 +15,7 @@ Route::get('/', ['uses'=>'Mycontroller@index']);
 // Route::get('index',function(){
 // 	return view('layouts.content',['index'=>'index']);
 // });
-Route::get('test',['uses'=>'Mycontroller@test']);
+Route::get('test/{page}',['uses'=>'Mycontroller@test']);
 
 Route::post('timviec',[
 	'as'=>'timviec',
@@ -38,5 +38,5 @@ Route::get('chitietvieclam/{id}',[
 	'as'=>'chitietvieclam',
 	'uses'=>'Mycontroller@chitietvieclam'
 ]);
-
+Route::post('dsvieclam',['as'=>'dsvieclam','uses'=>'Mycontroller@dsvieclam']);
 

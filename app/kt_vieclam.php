@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 
 class kt_vieclam extends Model
 {
@@ -64,6 +64,10 @@ class kt_vieclam extends Model
     }
     function vieclamthem(){
         $tb = $this->where('idloaiviec','9')->orderBy('ngaydang','DESC')->paginate(3);
+        return $tb;
+    }
+    function get_dsvieclam($tinh,$idloai,$v0,$v1,$ss,$start,$limit){
+        $tb = DB::select("select c.*, d.url from (select a.* , b.tendonvi from kt_vieclam a left join kt_nguoidung_tuyendung b on a.idtacgia = b.idnguoidung where a.congkhai > 0 and (a.tinh ='$tinh' or (a.v0 - $v0 + a.v1 - $v1) < $ss or 1 = 1)) as c left join oc_hinhanh d on c.idhinhanh = d.idhinh order by c.idvieclam desc limit $start, $limit ");
         return $tb;
     }
 }

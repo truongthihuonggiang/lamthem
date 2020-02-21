@@ -12,6 +12,9 @@
 li.nav-item.active {
     background-color: #F39C12;
 }
+.nav-item:hover{
+    background: #F39C12;
+}
 </style> 
    <!-- banner-inner -->
     <div id="demo-1" class="page-content">

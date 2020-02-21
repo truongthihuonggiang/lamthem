@@ -78,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- //dropdown nav -->
     <!-- password-script -->
-    <script>
+    <!-- <script>
         window.onload = function() {
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
@@ -93,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 document.getElementById("password2").setCustomValidity('');
             //empty string means no validation error
         }
-    </script>
+    </script> -->
     <!-- //password-script -->
 
     <!-- stats -->
