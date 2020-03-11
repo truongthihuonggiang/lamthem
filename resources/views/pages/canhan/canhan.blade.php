@@ -23,7 +23,7 @@
                     </div>
                     <div class="serve-grid col-md-4 col-sm-6 mt-lg-5 text-center">
                         <i class="fas fa-plus"></i>
-                        <h4 class="my-lg-4 my-3">Them tin tuyen dung</h4>
+                        <a href="{{route('themtintuyendung')}}"><h4 class="my-lg-4 my-3">Them tin tuyen dung</h4></a>
                     </div>
                 </div>
                 <div class="row mt-3">

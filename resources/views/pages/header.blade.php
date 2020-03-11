@@ -35,7 +35,7 @@ li.nav-item.active {
                                 <a href="{{route('dangky')}}" >
                                         <i class="far fa-user"></i> Đăng Ký</a>
                             </div>
-                            <!-- <div class="search col-md-2">
+                            <div class="search col-md-2">
                                 <div class="mobile-nav-button">
                                     <button id="trigger-overlay" type="button">
                                         <i class="fas fa-search"></i>
@@ -54,7 +54,7 @@ li.nav-item.active {
                                     </form>
                                 </div>
                                 open/close
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>

@@ -132,7 +132,7 @@
 
                     <div class="login px-4 mx-auto mw-100">
                         <h5 class="text-center mb-4">Đăng Nhập</h5>
-                        <form action="{{route('login')}}" method="post" role="form">
+                        <form action="{{route('dangnhap')}}" method="post" role="form">
                             {!! csrf_field() !!}
                             <div class="form-group">
                                 <label class="mb-2">Email</label>

@@ -8,25 +8,54 @@
 #job_info_right{
     width: 100%;
 }
-
+.emply-info{
+    text-transform: capitalize;
+}
+.emply-resume-info h4 a{
+    color: #000;
+}
+.emply-info h4 a{
+    transition: none;
+    
+}
+.emply-info:hover h4 a{
+    color:#F39C12;
+}
+.emply-resume-list{
+    transition: none;
+}
+#job_info_right{
+    position: relative;
+}
+.sticky{
+    position: fixed;
+    top: 20px;
+    width: 370px;
+    z-index: 100;
+    background: #fff;
+}
+#job_info_left{
+    float: right;
+}
 </style>
+
 <section class="banner-bottom-wthree py-lg-5 py-md-5 py-3">
         <div class="container">
-        
-            <div class="inner-sec-w3ls py-lg-5  py-3">
+            <div class="inner-sec-w3ls">
+                <h3 class="tittle text-center mb-lg-4 mb-3">Danh sách nhà tuyển dụng</h3>
             <!---728x90--->
                 <div class="row choose-main mt-5">
                     <div class="col-lg-12 job_info_right" id="job_info_right">
-                        <div class="col-lg-4 widget_search" id="search_info_right">
+                        <!-- form tìm kiếm -->
+                        <div class="col-lg-4 widget_search sticky-top" id="search_info_right">
                             <h3 class="j-b mb-3">Tìm kiếm</h3>
                             <div class="widget-content">
                                 <form action="{{route('timviec')}}" method="post">
                                     {!! csrf_field() !!}
                                     <div class="form-group">
                                         <label class="mb-2">Tỉnh/Thành phố</label>
-
                                         <select class="form-control jb_1" name="tinh">
-                                            <option value="all">Tất Cả</option>
+                                            <option value="">Tất Cả</option>
                                             <?php
                                                 foreach ($tb_tinh as $row) {
                                             ?>
@@ -50,7 +79,7 @@
                                         <label class="mb-2">Nghề nghiệp</label>
 
                                         <select class="form-control jb_2" name="idloaiviec">
-                                            <option value="all">Tất Cả</option>
+                                            <option value="">Tất Cả</option>
                                             <?php
                                                 foreach ($tb_loaicongviec as $row) {
                                             ?>
@@ -73,45 +102,48 @@
                                 </form>
                             </div>
                         </div>
-                       
+                    <!-- form tìm kiếm -->
                     <div class="col-lg-8 job_info_left" id="job_info_left">
                         <!--/ Emply List -->
                         <!-- danh sách nhà tuyển dụng -->
                         <?php
+                            $soviecxong = isset($tb_soviecxong)? $tb_soviecxong : 0;
+                            $soviecchuaxong = isset($tb_soviecchuaxong)? $tb_soviecchuaxong : 0;
                             if (isset($tb_nguoidung_tuyendung)&&count($tb_nguoidung_tuyendung)>0) {
                                 foreach ($tb_nguoidung_tuyendung as $row) {
                         ?>
                         <div class="emply-resume-list row mb-3">
-                            <div class="col-md-9 emply-info">
-                                <div class="emply-img">
+                            <div class="col-md-12 emply-info">
+                                <div class="col-md-3 emply-img">
                                     <img src="images/b1.jpg" alt="" class="img-fluid">
                                 </div>
-                                <div class="emply-resume-info">
+                                <div class="col-md-9 emply-resume-info">
                                     <h4><a href="employer_single.html"><?php echo $row->tendonvi?></a></h4>
-                                    <h5 class="mt-2">
-                                    @if(isset($tb_oc_nguoidung)) 
-                                    @foreach($tb_oc_nguoidung as $row1)
-                                        @if($row1->idnguoidung==$row->idtacgia)
-                                            {{$row1->ten}}
-                                        @endif
-                                    @endforeach
-                                    @endif
-                                    </h5>
                                     <p>{{$row->mota}}</p>
                                     <p></p>
-                                    <ul class="links_bottom_emp mt-2">
-                                        <i class="fas fa-map-marker-alt mx-2"></i> <?php echo $row->diachi.", ".$row->tinh?>
-                                        <li><i class="fas fa-users mx-2"></i>
+                                    <ul class="list-group links_bottom_emp mt-2">
+                                        <li><i class="fas fa-map-marker-alt mx-2"></i> <?php echo $row->diachi.", ".$row->tinh?></li>
                                         <span class="icon_text">
                                             {{$row->ngaydang}}
                                         </span>
                                         </li>
+                                        <li>
+                                            @foreach($soviecxong as $row1)
+                                            @if($row->idnguoidung==$row1->idtacgia)
+                                            Số việc xong :  {{$row1->soviecxong}}
+                                            @endif
+                                            @endforeach
+                                        </li>
+                                        <li>
+                                            @foreach($soviecchuaxong as $row1)
+                                            @if($row->idnguoidung==$row1->idtacgia)
+                                            Số việc chưa xong :{{ $row1->soviecchuaxong}}
+                                            @endif
+                                            @endforeach
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
-                            </div>
-                            <div class="col-md-3 emp_btn text-right">
-                                <a href="{{url('chitietvieclam/'.md5($row->idvieclam))}}" title="" class="aply-btn">Chi tiết</a>
                             </div>
                         </div>
                         <?php
@@ -135,7 +167,9 @@
                                 echo "Không tìm thấy công việc ".$tenloaiviec.$tinh;
                             }
                         ?>
-                        
+                        @if(isset($tb_nguoidung_tuyendung))
+                        {{$tb_nguoidung_tuyendung->links()}}
+                        @endif
                         <!--// Emply List -->
                         <!-- //danh sách nhà tuyển dụng -->
                     </div>
@@ -144,4 +178,13 @@
             </div>
         </div>
 </section>
+<div class="banner-bottom-wthree py-lg-5 py-md-5 py-3">
+    <div class="container">
+    @foreach($tb_nguoidung_tuyendung as $row)
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">{{$row->tendonvi}}</li>
+</ul>
+@endforeach
+</div>
+</div>
 @endsection

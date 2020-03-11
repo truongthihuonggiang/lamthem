@@ -8,28 +8,57 @@
 #job_info_right{
 	width: 100%;
 }
-
+.chitietvieclam{
+    border: none; 
+    background: #fff;
+    transition: all 0s ease-in-out;
+    padding :0;
+}
+.chitietvieclam h4{
+    text-transform: capitalize;
+}
+.chitietvieclam:focus{
+    box-shadow: none;
+}
+.tenvieclam:hover{
+    color: #F39C12;
+}
+.job-post-main:hover .chitietvieclam{
+    background: #f5f5f5;
+    transition: all 0.7s ease-in-out;
+}
+.job-single-sec .chitietvieclam h4{
+    word-break: break-all;
+}
+.tenvieclam{
+    cursor: pointer;
+    text-transform: capitalize;
+}
 </style>
-<section class="banner-bottom-wthree py-lg-5 py-md-5 py-3">
+<script>
+    function tenvieclam(idvieclam){
+        document.getElementById(idvieclam).submit();
+    }
+</script>
+<section class="banner-bottom-wthree pb-5">
         <div class="container">
 		
-            <div class="inner-sec-w3ls py-lg-5  py-3">
+            <div class="inner-sec-w3ls">
 			<!---728x90--->
-                <h3 class="tittle text-center mb-lg-4 mb-3">
+                <h3 class="tittle text-center mb-lg-4">
                     Kết quả tìm kiếm</h3>
 					<!---728x90--->
-                <div class="row choose-main mt-5">
+                <div class="row choose-main mt-2">
                     <div class="col-lg-12 job_info_right" id="job_info_right">
                         <div class="col-lg-4 widget_search" id="search_info_right">
                             <h3 class="j-b mb-3">Tìm kiếm</h3>
                             <div class="widget-content">
                                 <form action="{{route('timviec')}}" method="get">
-                                    {!! csrf_field() !!}
                                     <div class="form-group">
                                         <label class="mb-2">Tỉnh/Thành phố</label>
 
                                         <select class="form-control jb_1" name="tinh">
-                                            <option value="all">Tất Cả</option>
+                                            <option value="">Tất Cả</option>
                                             <?php
                                                 foreach ($tb_tinh as $row) {
                                             ?>
@@ -53,7 +82,7 @@
                                         <label class="mb-2">Nghề nghiệp</label>
 
                                         <select class="form-control jb_2" name="idloaiviec">
-                                            <option value="all">Tất Cả</option>
+                                            <option value="">Tất Cả</option>
                                             <?php
                                                 foreach ($tb_loaicongviec as $row) {
                                             ?>
@@ -79,63 +108,57 @@
                        
                     <div class="col-lg-8 job_info_left" id="job_info_left">
                         <!--/ Emply List -->
-                        <?php
-                            if (isset($tb_timviec)&&count($tb_timviec)>0) {
-                                foreach ($tb_timviec as $row) {
-                        ?>
-                        <div class="job-post-main row my-3">
-                            <div class="col-md-9 job-post-info text-left">
-                                <div class="job-post-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="job-single-sec">
-                                <h4><a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a></h4>
-                                <p class="my-2">
-                                <?php 
-                                    foreach ($tb_oc_nguoidung as $row1) {
-                                    if ($row1->idnguoidung==$row->idtacgia) {
-                                        echo $row1->ten;
-                                            }
-                                        }
-                                    ?>
-                                </p>
-                                    <ul class="job-list-info d-flex">
-                                        <li><i class="fas fa-user"></i><?php echo "so luong :".$row->songuoi?></li>
-                                        <li><i class="fas fa-map-marker-alt"></i><?php echo $row->thanhpho."-".$row->tinh?></li>
-                                        <li><i class="fas fa-dollar-sign"></i> <?php echo $row->luongtrongoi?></li>
-                                    </ul>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="col-md-3 job-single-time text-right">
-                                    <span class="job-time">
-                                    <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
-                                    <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
-                                </div>
-                        </div>
-
-                        <?php
-                                }
-                                echo $tb_timviec->links();
-                            }
-                            else{
-                                $tinh="";
-                                $tenloaiviec="";
-                                if (isset($_POST['tinh'])&&isset($_POST['idloaiviec'])) {
-                                    foreach ($tb_tinh as $row) {
-                                        if ($row->tinh==$_POST['tinh']) {
-                                            $tinh = " ở ".$row->tinh;
-                                        }
-                                    }
-                                    foreach ($tb_loaicongviec as $row) {
-                                        if ($row->idloaiviec==$_POST['idloaiviec']) {
-                                            $tenloaiviec = $row->tenloaiviec;
-                                        }
-                                    }
-                                }
-                                echo "Không tìm thấy công việc ".$tenloaiviec.$tinh;
-                            }
-                        ?>
+                        @if (isset($tb_timviec)&&count($tb_timviec)>0)
+                        @foreach ($tb_timviec as $row) 
+                        <div class="col-md-12 job-post-main row py-3 float-left">
+                                                <div class="col-md-3 anhtuyendung">
+                                                @if(file_exists($row->url))
+                                                    <img src="{{asset('$row->url')}}" >
+                                                    @else
+                                                    <img src="{{asset('images/no_image.png')}}">
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-9 job-post-info text-left">
+                                                    <div class="job-single-sec">
+                                                    <form action="{{route('chitietvieclam')}}" method="post" id="{{$row->idvieclam}}">
+                                                        {!! csrf_field() !!}
+                                                        <input type="hidden" name="idvieclam" value="{{$row->idvieclam}}">
+                                                        <input type="hidden" name="tendonvi" value="{{$row->tendonvi}}">
+                                                        <input type="hidden" name="dadangky" value="{{$row->dadangky}}">
+                                                    </form>
+                                                    <h4 class="tenvieclam" onclick="tenvieclam({{$row->idvieclam}});">{{$row->tenvieclam}}</h4>
+                                                    <p style="color: #239B56; font-weight: bold;"><i class="far fa-clock"></i> {{$row->ngaydang}}</p>
+                                                    <p>{{$row->tendonvi}}</p>
+                                                    <ul class="job-list-info d-flex">
+                                                        <li>
+                                                            <i class="fas fa-user"></i><?php 
+                                                            $chuadangky =$row->songuoi - $row->dadangky;
+                                                            if($row->dadangky>=$row->songuoi)
+                                                                {echo $row->songuoi." - Đã hoàn thành";}
+                                                            else{
+                                                                echo $row->songuoi." Còn : ".$chuadangky;
+                                                            }
+                                                             ?></li>
+                                                        <li>
+                                                            <i class="fas fa-map-marker-alt"></i>{{$row->tinh}}</li>
+                                                        <li>
+                                                            <i class="fas fa-dollar-sign"></i>
+                                                            @if(!empty($row->luonggio))
+                                                            {{$row->luonggio}} theo giờ
+                                                            @else
+                                                            {{$row->luongtrongoi}} trọn gói
+                                                            @endif
+                                                        </li>
+                                                    </ul>
+                                                    </div>
+                                                <div class="clearfix"></div>
+                                                </div>
+                                        </div>
+                                        @endforeach
+                             <div class="row px-3 py-3">{{$tb_timviec->links()}}</div>   
+                            @else
+                            Không có dữ liệu
+                            @endif
                         <!-- content -->
                         
                         <!--// Emply List -->

@@ -32,12 +32,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body class="">
+<style type="text/css">
+body,*,a,h1,h2,h3,h4,h5,p,span,body a{
+    font-family: Times New Roman;
+}
+
+</style>
+<?php @session_start();?>
     <!-- header -->
-    @if(isset($page))
-        @include('pages.header')
-    @else
         @include('layouts.header') 
-    @endif
     <!-- //header -->
     <!-- content -->
     <div id="content">

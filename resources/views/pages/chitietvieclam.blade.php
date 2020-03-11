@@ -27,8 +27,29 @@
 #noidung_binhluan{
     color: #145A32;
 }
+.qual-icon{
+    width: 100%;
+}
+.qual-icon span,
+.qual-icon i{
+    font-size: 1.25em;
+}
+
+.anhvieclam img{
+    width: 100%;
+    height: 50%;
+}
+.emply-resume-info h4{
+    padding-left: 0.5em;
+}
+.emply-resume-info h4 i{
+    font-size: 1.5em;
+    padding: 0 0.5em;
+    color: #F39C12;
+}
 </style>
 <?php
+session_start();
 if (isset($tb_vieclam)) {
 	foreach ($tb_vieclam as $row) {
 		
@@ -40,111 +61,79 @@ if (isset($tb_vieclam)) {
             <div class="inner-sec-w3ls">
                 <div class="single-user-candidate">
                     <div class="user-detail-info">
-                        <div class="user-content-info emply-resume-info mt-4">
+                        <div class="user-content-info emply-resume-info">
                             <h4>
-                                <a href="#">{{$row->tenvieclam}}</a>
+                                <i class="fas fa-briefcase"></i><a href="#">{{$row->tenvieclam}}</a>
                             </h4>
                         </div>
                     </div>
                 </div>
                 <!--row -->
                 <div class="row qualification-details mt-2">
-                    <div class="col-md-12 qual-grid mt-2">
-                        <div class=" col-md-4 qual-icon">
-                            <i class="far fa-building"></i><span class="col-md-3 ml-2">Người tuyển</span>
+                    <div class="row col-md-12">
+                        <div class="col-md-3 anhvieclam">
+                            @if(file_exists($row->url))
+                            <img src="{{asset('$row->url')}}" >
+                            @else
+                            <img src="{{asset('images/no_image.png')}}">
+                            @endif
                         </div>
-                        <div class="qual-info">
-                            <h4>
-                            <?php
-                            	if (isset($tb_oc_nguoidung)) {
-                            		foreach ($tb_oc_nguoidung as $row1) {
-                            			if ($row1->idnguoidung==$row->idtacgia) {
-                            				if (!empty($row1->ten)) {
-                                               $tacgia = $row1->ten;
-                                            }
-                                            
-                            			}
-                            		}
-                                    if (isset($tacgia)) {
-                                        echo $tacgia;
-                                    }
-                                    else{
-                                        echo "Không có thông tin";
-                                    }
-                            	}
-                            	else
-                            	{
-                            		echo "Không có thông tin";
-                            	}
-                            ?>	
-                            </h4>
+                        <div class="col-md-9">
+                            <div class="row">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">
+                                <div class="qual-icon">
+                                    <i class="far fa-building"></i><span class="col-md-3 ml-2">Người tuyển : {{$tendonvi}}</span>
+                                </div>
+                              </li>
+                              <li class="list-group-item">
+                                <div class="qual-icon">
+                                    <i class="far fa-file-alt"></i><span class="col-md-3 ml-2">Mô tả : {{$row->mota}}</span>
+                                </div>
+                              </li>
+                              <li class="list-group-item">
+                                  <div class="qual-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span class="col-md-3 ml-2">Lương : 
+                                        @if(!empty($row->luongtrongoi))
+                                        {{$row->luongtrongoi}} trọn gói
+                                        @else
+                                        {{$row->luonggio}} theo giờ
+                                        @endif
+
+                                        </span>
+                                        <i class="fas fa-user"></i>
+                                        <?php 
+                                        $chuadangky = $row->songuoi - $dadangky;
+                                        if($dadangky>=$row->songuoi)
+                                            {echo $row->songuoi." - Đã hoàn thành";}
+                                            else{
+                                                echo $row->songuoi."    Còn ".$chuadangky." người";
+                                                }
+                                        ?>
+                                </div>
+                              </li>
+                              <li class="list-group-item">
+                                  <div class="qual-icon">
+                                    <i class="fas fa-map-marker-alt"></i><span class="col-md-3 ml-2">Địa điểm : {{$row->thanhpho}} {{$row->tinh}}</span>
+                                </div>
+                              </li>
+                              <li class="list-group-item">
+                                  <div class="qual-icon">
+                                    <i class="far fa-clock"></i><span class="col-md-3 ml-2">Thời gian tuyển dụng : {{$row->ngaybatdau}} - {{$row->ngayketthuc}}</span>
+                                </div>
+                              </li>
+                            </ul>
+                            </div>
+                            @if($chuadangky>0)
+                            <form>
+                                <button type="button" class="btn btn-success">Đăng ký</button>
+                            </form>
+                            @endif
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-4 qual-icon">
-                            <i class="far fa-file-alt"></i><span class="col-md-3 ml-2">Mô tả </span>
-                        </div>
-                        <div class="qual-info">
-                            <h4>
-                                @if(!empty($row->mota))
-                                    {{$row->mota}}
-                                @else
-                                    Không có thông tin
-                                @endif
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-4 qual-icon ">
-                            <i class="fas fa-dollar-sign"></i><span class="col-md-3 ml-2">Lương trọn gói </span>
-                        </div>
-                        <div class="qual-info">
-                            <h4>
-                                @if(!empty($row->luongtrongoi))
-                                    {{$row->luongtrongoi}}
-                                @else
-                                    Không có thông tin
-                                @endif
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                     <div class="col-md-12 qual-grid mt-2">
-                        <div class="col-md-4 qual-icon">
-                        <i class="fas fa-map-marker-alt"></i><span class="col-md-3 ml-2">Địa điểm </span>
-                        </div>
-                        <div class="qual-info">
-                            <h4>
-                                @if(!empty($row->tinh))
-                                    {{$row->phuongxa.' '.$row->thanhpho.', '.$row->tinh}}
-                                @else
-                                    Không có thông tin
-                                @endif
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-12 qual-grid mt-2" style="border-bottom: none;">
-                        <div class="col-md-4 qual-icon">
-                            <i class="far fa-clock"></i><span class="col-md-3 ml-2">Thời gian tuyển dụng</span>
-                        </div>
-                        <div class="qual-info" style="border-bottom: none;">
-                            <h4>
-                                @if(!empty($row->ngaybatdau)||!empty($row->ngayketthuc))
-                                    {{$row->ngaybatdau.' - '.$row->ngayketthuc}}
-                                @else
-                                    Không có thông tin
-                                @endif
-                            </h4>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-12 qual-grid mt-5">
-                        <a href="" class="aply-btn" style=" margin-left: 40%; padding: 0.5em 3em; background: #145A32;">Đăng ký</a> 
                     </div>
                 </div>
+                <!-- --------------------------- -->
                 <!--row -->
 				
                 <!-- binh luan viec lam -->
@@ -157,21 +146,8 @@ if (isset($tb_vieclam)) {
                                 @foreach($tb_binhluan as $row)
                                 @if($row->congkhai==1)
                                 <li class="mb-5" style="">
-                                    @if(isset($tb_oc_nguoidung))
-                                    @foreach($tb_oc_nguoidung as $row1)
-                                    @if($row1->idnguoidung==$row->idnguoidung)
-                                        @if(!empty($row1->ten))
-                                        <?php $nguoidung_binhluan = $row1->ten?>
-                                        @endif
-                                    @endif
-                                    @endforeach
-                                    @endif
                                     <h6>
-                                        @if(isset($nguoidung_binhluan))
-                                        {{$nguoidung_binhluan}}
-                                        @else
-                                        Không có thông tin
-                                        @endif
+                                        {{$row->ten}}
                                     </h6>
                                     <p>{{$row->ngaydang}}</p>
                                     <i id="noidung_binhluan">{{$row->noidung}}</i>
@@ -181,7 +157,7 @@ if (isset($tb_vieclam)) {
                                 @endif
                             </ul>
                         </div>
-                        @if(isset($_SESSION['login'])&&$_SESSION['login']==1)
+                        @if(isset($_SESSION['login']))
                         <form action="#" method="post" class="row">
                             <div class="col-lg-6 emp-single-line">
                                 <div class="form-group">
@@ -195,7 +171,7 @@ if (isset($tb_vieclam)) {
                         </form>
                         @else
                         <div class="top-vl">
-                        <div class="col-md-3 sign-btn">
+                        <div class="row">
                                 <a href="#" data-toggle="modal" data-target="#exampleModalCenter">
                                     <i class="fas fa-lock mr-2"></i>Đăng nhập để bình luận</a>
                         </div>
@@ -220,15 +196,7 @@ if (isset($tb_vieclam)) {
                                     <h4>
                                         <a href="{{'chitietvieclam/'.$row->idvieclam}}"><?php echo $row->tenvieclam?></a>
                                     </h4>
-                                    <p class="my-2">
-                                    <?php 
-                                        foreach ($tb_oc_nguoidung as $row1) {
-                                        if ($row1->idnguoidung==$row->idtacgia) {
-                                            echo $row1->ten;
-                                            }
-                                        }
-                                    ?>
-                                    </p>
+                                    <p class="my-2">{{$row->tendonvi}}</p>
                                     <ul class="job-list-info d-flex">
                                         <li>
                                             <i class="fas fa-user"></i><?php echo "so luong :".$row->songuoi?></li>
@@ -243,7 +211,7 @@ if (isset($tb_vieclam)) {
                             <div class="col-md-3 job-single-time text-right">
                                 <span class="job-time">
                                 <i class="far fa-clock"></i> <?php echo $row->ngaydang?></span>
-                                <a href="{{'chitietvieclam/'.md5($row->idvieclam)}}" class="aply-btn" >Đăng ký</a>
+                                <a href="{{url('chitietvieclam/'.md5($row->idvieclam))}}" class="aply-btn" >Đăng ký</a>
                             </div>
                         </div>
                         @endforeach
